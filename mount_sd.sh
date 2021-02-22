@@ -1,5 +1,5 @@
 
-sudo mkdirc /home/mendel/sd_card
+sudo mkdir /home/mendel/sd_card
 
 sudo fdisk -l
 sudo mount /dev/mmcblk1 /home/mendel/sd_card
