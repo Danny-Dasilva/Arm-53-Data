@@ -1,0 +1,2004 @@
+Architecture:        aarch64
+Byte Order:          Little Endian
+CPU(s):              4
+On-line CPU(s) list: 0-3
+Thread(s) per core:  1
+Core(s) per socket:  4
+Socket(s):           1
+NUMA node(s):        1
+Vendor ID:           ARM
+Model:               4
+Model name:          Cortex-A53
+Stepping:            r0p4
+CPU max MHz:         1500.0000
+CPU min MHz:         500.0000
+BogoMIPS:            16.66
+L1d cache:           unknown size
+L1i cache:           unknown size
+L2 cache:            unknown size
+NUMA node0 CPU(s):   0-3
+Flags:               fp asimd evtstrm aes pmull sha1 sha2 crc32 cpuid
+================================================================================
+/root/i-benchmarks/word2vec/bin
+perf stat -o ../data/word2vec_perf_output_1614140112655688899.txt --per-core -a taskset -c 0-3 ./word2vec -train ../data/text8_1.7mb -output ../data/text8-vector.bin -cbow 1 -size 200 -window 8 -negative 25 -hs 0 -sample 1e-4 -threads 4 -binary 1 -iter 15
+Starting training using file ../data/text8_1.7mb
+Vocab size: 5847
+Words in train file: 252418
+Alpha: 0.000200  Progress: 99.92%  Words/thread/sec: 14.98k  # started on Wed Feb 24 04:15:12 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1          229305.79 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1              35214      context-switches          #    0.154 K/sec                  
+S0-C0           1               1033      cpu-migrations            #    0.005 K/sec                  
+S0-C0           1              16128      page-faults               #    0.070 K/sec                  
+S0-C0           1       105567306320      cycles                    #    0.460 GHz                    
+S0-C0           1        63875695873      instructions              #    0.61  insn per cycle         
+S0-C0           1         9305645629      branches                  #   40.582 M/sec                  
+S0-C0           1          146616780      branch-misses             #    1.58% of all branches        
+S0-C1           1          229305.79 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1              35523      context-switches          #    0.155 K/sec                  
+S0-C1           1                992      cpu-migrations            #    0.004 K/sec                  
+S0-C1           1              16403      page-faults               #    0.072 K/sec                  
+S0-C1           1        98706715687      cycles                    #    0.430 GHz                    
+S0-C1           1        58777592472      instructions              #    0.60  insn per cycle         
+S0-C1           1         8568375311      branches                  #   37.367 M/sec                  
+S0-C1           1           83810144      branch-misses             #    0.98% of all branches        
+S0-C2           1          229305.75 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1              32190      context-switches          #    0.140 K/sec                  
+S0-C2           1                938      cpu-migrations            #    0.004 K/sec                  
+S0-C2           1              63368      page-faults               #    0.276 K/sec                  
+S0-C2           1       101429942084      cycles                    #    0.442 GHz                    
+S0-C2           1        59924173210      instructions              #    0.59  insn per cycle         
+S0-C2           1         8623068091      branches                  #   37.605 M/sec                  
+S0-C2           1           87912661      branch-misses             #    1.02% of all branches        
+S0-C3           1          229305.75 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1              30017      context-switches          #    0.131 K/sec                  
+S0-C3           1                880      cpu-migrations            #    0.004 K/sec                  
+S0-C3           1              11497      page-faults               #    0.050 K/sec                  
+S0-C3           1       127102720558      cycles                    #    0.554 GHz                    
+S0-C3           1        80990996598      instructions              #    0.64  insn per cycle         
+S0-C3           1        11691265645      branches                  #   50.985 M/sec                  
+S0-C3           1          247323552      branch-misses             #    2.12% of all branches        
+
+     229.309747000 seconds time elapsed
+
+perf stat -o ../data/word2vec_perf_output_no_branch_1614140112659540792.txt --per-core -a taskset -c 0-3 ./word2vec_no-guess-branch-probability -train ../data/text8_3.3mb -output ../data/text8-vector.bin -cbow 1 -size 200 -window 8 -negative 25 -hs 0 -sample 1e-4 -threads 4 -binary 1 -iter 15
+Starting training using file ../data/text8_3.3mb
+Vocab size: 9546
+Words in train file: 524166
+Alpha: 0.000005  Progress: 100.43%  Words/thread/sec: 28.73k  # started on Wed Feb 24 04:19:02 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           95050.24 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1              23613      context-switches          #    0.248 K/sec                  
+S0-C0           1               1142      cpu-migrations            #    0.012 K/sec                  
+S0-C0           1               1920      page-faults               #    0.020 K/sec                  
+S0-C0           1       105957197012      cycles                    #    1.115 GHz                    
+S0-C0           1        41314941576      instructions              #    0.39  insn per cycle         
+S0-C0           1         1325193583      branches                  #   13.942 M/sec                  
+S0-C0           1           69034294      branch-misses             #    5.21% of all branches        
+S0-C1           1           95050.20 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1              13188      context-switches          #    0.139 K/sec                  
+S0-C1           1                682      cpu-migrations            #    0.007 K/sec                  
+S0-C1           1               2303      page-faults               #    0.024 K/sec                  
+S0-C1           1       102418979661      cycles                    #    1.078 GHz                    
+S0-C1           1        40103645131      instructions              #    0.39  insn per cycle         
+S0-C1           1         1253127011      branches                  #   13.184 M/sec                  
+S0-C1           1           55422976      branch-misses             #    4.42% of all branches        
+S0-C2           1           95050.20 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1              25287      context-switches          #    0.266 K/sec                  
+S0-C2           1               1115      cpu-migrations            #    0.012 K/sec                  
+S0-C2           1              81238      page-faults               #    0.855 K/sec                  
+S0-C2           1       109967307957      cycles                    #    1.157 GHz                    
+S0-C2           1        43355829681      instructions              #    0.39  insn per cycle         
+S0-C2           1         1572050436      branches                  #   16.539 M/sec                  
+S0-C2           1           70235938      branch-misses             #    4.47% of all branches        
+S0-C3           1           95050.70 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1              17250      context-switches          #    0.181 K/sec                  
+S0-C3           1                832      cpu-migrations            #    0.009 K/sec                  
+S0-C3           1               1528      page-faults               #    0.016 K/sec                  
+S0-C3           1       107099971848      cycles                    #    1.127 GHz                    
+S0-C3           1        41893883530      instructions              #    0.39  insn per cycle         
+S0-C3           1         1308816351      branches                  #   13.770 M/sec                  
+S0-C3           1           59860294      branch-misses             #    4.57% of all branches        
+
+      95.052967764 seconds time elapsed
+
+================================================================================
+perf stat -o sqlite_4_threads.txt  --per-core -a taskset -c 0-3 ./sqlite_benchmark 4
+SUCCESS::pthread_create() succeeded for command ./speedtest1 --size 130
+SUCCESS::pthread_create() succeeded for command ./speedtest1 --size 130
+SUCCESS::pthread_create() succeeded for command ./speedtest1 --size 130
+SUCCESS::pthread_create() succeeded for command ./speedtest1 --size 130
+-- Speedtest1 for SQLite 3.31.1 2020-01-27 19:55:54 3bfa9cc97da10598521b342961df8f
+-- Speedtest1 for SQLite 3.31.1 2020-01-27 19:55:54 3bfa9cc97da10598521b342961df8f
+-- Speedtest1 for SQLite 3.31.1 2020-01-27 19:55:54 3bfa9cc97da10598521b342961df8f
+-- Speedtest1 for SQLite 3.31.1 2020-01-27 19:55:54 3bfa9cc97da10598521b342961df8f
+ 100 - 13000 INSERTs into table with no index......................  100 - 13000 INSERTs into table with no index......................  100 - 13000 INSERTs into table with no index......................  100 - 13000 INSERTs into table with no index......................    0.059s
+ 110 - 13000 ordered INSERTS with one index/PK.....................    0.060s
+ 110 - 13000 ordered INSERTS with one index/PK.....................    0.061s
+ 110 - 13000 ordered INSERTS with one index/PK.....................    0.062s
+ 110 - 13000 ordered INSERTS with one index/PK.....................    0.087s
+ 120 - 13000 unordered INSERTS with one index/PK...................    0.087s
+ 120 - 13000 unordered INSERTS with one index/PK...................    0.088s
+ 120 - 13000 unordered INSERTS with one index/PK...................    0.090s
+ 120 - 13000 unordered INSERTS with one index/PK...................    0.116s
+ 130 - 25 SELECTS, numeric BETWEEN, unindexed......................    0.112s
+ 130 - 25 SELECTS, numeric BETWEEN, unindexed......................    0.109s
+ 130 - 25 SELECTS, numeric BETWEEN, unindexed......................    0.118s
+ 130 - 25 SELECTS, numeric BETWEEN, unindexed......................    0.079s
+ 140 - 10 SELECTS, LIKE, unindexed.................................    0.078s
+ 140 - 10 SELECTS, LIKE, unindexed.................................    0.078s
+ 140 - 10 SELECTS, LIKE, unindexed.................................    0.080s
+ 140 - 10 SELECTS, LIKE, unindexed.................................    0.131s
+ 142 - 10 SELECTS w/ORDER BY, unindexed............................    0.134s
+ 142 - 10 SELECTS w/ORDER BY, unindexed............................    0.134s
+ 142 - 10 SELECTS w/ORDER BY, unindexed............................    0.135s
+ 142 - 10 SELECTS w/ORDER BY, unindexed............................    0.203s
+ 145 - 10 SELECTS w/ORDER BY and LIMIT, unindexed..................    0.208s
+   0.206s
+ 145 - 10 SELECTS w/ORDER BY and LIMIT, unindexed..................  145 - 10 SELECTS w/ORDER BY and LIMIT, unindexed..................    0.210s
+ 145 - 10 SELECTS w/ORDER BY and LIMIT, unindexed..................    0.111s
+ 150 - CREATE INDEX five times.....................................    0.111s
+ 150 - CREATE INDEX five times.....................................    0.114s
+ 150 - CREATE INDEX five times.....................................    0.115s
+ 150 - CREATE INDEX five times.....................................    0.136s
+ 160 - 2600 SELECTS, numeric BETWEEN, indexed......................    0.136s
+ 160 - 2600 SELECTS, numeric BETWEEN, indexed......................    0.136s
+ 160 - 2600 SELECTS, numeric BETWEEN, indexed......................    0.139s
+ 160 - 2600 SELECTS, numeric BETWEEN, indexed......................    0.065s
+ 161 - 2600 SELECTS, numeric BETWEEN, PK...........................    0.065s
+ 161 - 2600 SELECTS, numeric BETWEEN, PK...........................    0.064s
+ 161 - 2600 SELECTS, numeric BETWEEN, PK...........................    0.065s
+ 161 - 2600 SELECTS, numeric BETWEEN, PK...........................    0.063s
+ 170 - 2600 SELECTS, text BETWEEN, indexed.........................    0.065s
+ 170 - 2600 SELECTS, text BETWEEN, indexed.........................    0.065s
+ 170 - 2600 SELECTS, text BETWEEN, indexed.........................    0.068s
+ 170 - 2600 SELECTS, text BETWEEN, indexed.........................    0.133s
+ 180 - 13000 INSERTS with three indexes............................    0.133s
+ 180 - 13000 INSERTS with three indexes............................    0.138s
+ 180 - 13000 INSERTS with three indexes............................    0.137s
+ 180 - 13000 INSERTS with three indexes............................    0.140s
+ 190 - DELETE and REFILL one table.................................    0.139s
+ 190 - DELETE and REFILL one table.................................    0.144s
+ 190 - DELETE and REFILL one table.................................    0.147s
+ 190 - DELETE and REFILL one table.................................    0.144s
+ 200 - VACUUM......................................................    0.145s
+ 200 - VACUUM......................................................    0.147s
+ 200 - VACUUM......................................................    0.149s
+ 200 - VACUUM......................................................    0.216s
+ 210 - ALTER TABLE ADD COLUMN, and query...........................    0.006s
+ 230 - 2600 UPDATES, numeric BETWEEN, indexed......................    0.219s
+ 210 - ALTER TABLE ADD COLUMN, and query...........................    0.006s
+ 230 - 2600 UPDATES, numeric BETWEEN, indexed......................    0.216s
+ 210 - ALTER TABLE ADD COLUMN, and query...........................    0.005s
+ 230 - 2600 UPDATES, numeric BETWEEN, indexed......................    0.219s
+ 210 - ALTER TABLE ADD COLUMN, and query...........................    0.006s
+ 230 - 2600 UPDATES, numeric BETWEEN, indexed......................    0.060s
+ 240 - 13000 UPDATES of individual rows............................    0.056s
+ 240 - 13000 UPDATES of individual rows............................    0.055s
+ 240 - 13000 UPDATES of individual rows............................    0.056s
+ 240 - 13000 UPDATES of individual rows............................    0.092s
+ 250 - One big UPDATE of the whole 13000-row table.................    0.090s
+ 250 - One big UPDATE of the whole 13000-row table.................    0.090s
+ 250 - One big UPDATE of the whole 13000-row table.................    0.028s
+ 260 - Query added column after filling............................    0.005s
+ 270 - 2600 DELETEs, numeric BETWEEN, indexed......................    0.095s
+ 250 - One big UPDATE of the whole 13000-row table.................    0.028s
+   0.025s
+ 260 - Query added column after filling............................  260 - Query added column after filling............................    0.004s
+ 270 - 2600 DELETEs, numeric BETWEEN, indexed......................    0.006s
+ 270 - 2600 DELETEs, numeric BETWEEN, indexed......................    0.026s
+ 260 - Query added column after filling............................    0.006s
+ 270 - 2600 DELETEs, numeric BETWEEN, indexed......................    0.134s
+ 280 - 13000 DELETEs of individual rows............................    0.131s
+ 280 - 13000 DELETEs of individual rows............................    0.133s
+ 280 - 13000 DELETEs of individual rows............................    0.135s
+ 280 - 13000 DELETEs of individual rows............................    0.122s
+ 290 - Refill two 13000-row tables using REPLACE...................    0.120s
+ 290 - Refill two 13000-row tables using REPLACE...................    0.120s
+ 290 - Refill two 13000-row tables using REPLACE...................    0.124s
+ 290 - Refill two 13000-row tables using REPLACE...................    0.326s
+ 300 - Refill a 13000-row table using (b&1)==(a&1).................    0.321s
+ 300 - Refill a 13000-row table using (b&1)==(a&1).................    0.328s
+ 300 - Refill a 13000-row table using (b&1)==(a&1).................    0.332s
+ 300 - Refill a 13000-row table using (b&1)==(a&1).................    0.156s
+ 310 - 2600 four-ways joins........................................    0.159s
+ 310 - 2600 four-ways joins........................................    0.158s
+ 310 - 2600 four-ways joins........................................    0.168s
+ 310 - 2600 four-ways joins........................................    0.314s
+ 320 - subquery in result set......................................    0.314s
+ 320 - subquery in result set......................................    0.317s
+ 320 - subquery in result set......................................    0.315s
+ 320 - subquery in result set......................................    0.604s
+ 400 - 26000 REPLACE ops on an IPK.................................    0.605s
+ 400 - 26000 REPLACE ops on an IPK.................................    0.604s
+ 400 - 26000 REPLACE ops on an IPK.................................    0.609s
+ 400 - 26000 REPLACE ops on an IPK.................................    0.195s
+ 410 - 26000 SELECTS on an IPK.....................................    0.195s
+ 410 - 26000 SELECTS on an IPK.....................................    0.192s
+ 410 - 26000 SELECTS on an IPK.....................................    0.197s
+ 410 - 26000 SELECTS on an IPK.....................................    0.123s
+ 500 - 26000 REPLACE on TEXT PK....................................    0.120s
+ 500 - 26000 REPLACE on TEXT PK....................................    0.123s
+ 500 - 26000 REPLACE on TEXT PK....................................    0.123s
+ 500 - 26000 REPLACE on TEXT PK....................................    0.189s
+ 510 - 26000 SELECTS on a TEXT PK..................................    0.193s
+ 510 - 26000 SELECTS on a TEXT PK..................................    0.190s
+ 510 - 26000 SELECTS on a TEXT PK..................................    0.194s
+ 510 - 26000 SELECTS on a TEXT PK..................................    0.199s
+ 520 - 26000 SELECT DISTINCT.......................................    0.203s
+ 520 - 26000 SELECT DISTINCT.......................................    0.203s
+ 520 - 26000 SELECT DISTINCT.......................................    0.207s
+ 520 - 26000 SELECT DISTINCT.......................................    0.134s
+ 980 - PRAGMA integrity_check......................................    0.138s
+ 980 - PRAGMA integrity_check......................................    0.136s
+ 980 - PRAGMA integrity_check......................................    0.142s
+ 980 - PRAGMA integrity_check......................................    0.285s
+ 990 - ANALYZE.....................................................    0.288s
+   0.285s
+ 990 - ANALYZE.....................................................  990 - ANALYZE.....................................................    0.050s
+       TOTAL.......................................................    4.712s
+   0.050s
+       TOTAL.......................................................    4.724s
+   0.051s
+       TOTAL.......................................................    4.718s
+SUCCESS::system(./speedtest1 --size 130) succeeded
+SUCCESS::system(./speedtest1 --size 130) succeeded
+SUCCESS::system(./speedtest1 --size 130) succeeded
+   0.289s
+ 990 - ANALYZE.....................................................    0.049s
+       TOTAL.......................................................    4.792s
+SUCCESS::system(./speedtest1 --size 130) succeeded
+# started on Wed Feb 24 04:20:40 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1            4847.04 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               7076      context-switches          #    0.001 M/sec                  
+S0-C0           1                106      cpu-migrations            #    0.022 K/sec                  
+S0-C0           1               1740      page-faults               #    0.359 K/sec                  
+S0-C0           1         7211561741      cycles                    #    1.488 GHz                    
+S0-C0           1         4883314091      instructions              #    0.68  insn per cycle         
+S0-C0           1          609292746      branches                  #  125.704 M/sec                  
+S0-C0           1           34751007      branch-misses             #    5.70% of all branches        
+S0-C1           1            4847.00 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               2653      context-switches          #    0.547 K/sec                  
+S0-C1           1                175      cpu-migrations            #    0.036 K/sec                  
+S0-C1           1               1887      page-faults               #    0.389 K/sec                  
+S0-C1           1         7097648790      cycles                    #    1.464 GHz                    
+S0-C1           1         4856547582      instructions              #    0.68  insn per cycle         
+S0-C1           1          604116291      branches                  #  124.637 M/sec                  
+S0-C1           1           33051543      branch-misses             #    5.47% of all branches        
+S0-C2           1            4847.05 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               2479      context-switches          #    0.511 K/sec                  
+S0-C2           1                167      cpu-migrations            #    0.034 K/sec                  
+S0-C2           1               1982      page-faults               #    0.409 K/sec                  
+S0-C2           1         7121157005      cycles                    #    1.469 GHz                    
+S0-C2           1         4855470700      instructions              #    0.68  insn per cycle         
+S0-C2           1          604113195      branches                  #  124.635 M/sec                  
+S0-C2           1           32746869      branch-misses             #    5.42% of all branches        
+S0-C3           1            4847.04 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               3167      context-switches          #    0.653 K/sec                  
+S0-C3           1                159      cpu-migrations            #    0.033 K/sec                  
+S0-C3           1               1959      page-faults               #    0.404 K/sec                  
+S0-C3           1         7101802968      cycles                    #    1.465 GHz                    
+S0-C3           1         4857324580      instructions              #    0.68  insn per cycle         
+S0-C3           1          604193540      branches                  #  124.652 M/sec                  
+S0-C3           1           32913684      branch-misses             #    5.45% of all branches        
+
+       4.848947081 seconds time elapsed
+
+================================================================================
+perf stat -o go_word2vec_4_threads.txt  --per-core -a taskset -c 0-3 ./go_word2vec.sh 4
+/root/i-benchmarks/golang/bin
+Save trained vectors to example/word_vectors_sg.txt
+# started on Wed Feb 24 04:20:45 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           26140.99 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               7034      context-switches          #    0.269 K/sec                  
+S0-C0           1                 57      cpu-migrations            #    0.002 K/sec                  
+S0-C0           1               1326      page-faults               #    0.051 K/sec                  
+S0-C0           1        33826083431      cycles                    #    1.294 GHz                    
+S0-C0           1        23794678368      instructions              #    0.70  insn per cycle         
+S0-C0           1         2183244682      branches                  #   83.518 M/sec                  
+S0-C0           1           41985922      branch-misses             #    1.92% of all branches        
+S0-C1           1           26140.99 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               4760      context-switches          #    0.182 K/sec                  
+S0-C1           1                 56      cpu-migrations            #    0.002 K/sec                  
+S0-C1           1                983      page-faults               #    0.038 K/sec                  
+S0-C1           1        30630356935      cycles                    #    1.172 GHz                    
+S0-C1           1        20573286050      instructions              #    0.67  insn per cycle         
+S0-C1           1         1897396403      branches                  #   72.583 M/sec                  
+S0-C1           1           26104718      branch-misses             #    1.38% of all branches        
+S0-C2           1           26141.01 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               4154      context-switches          #    0.159 K/sec                  
+S0-C2           1                 52      cpu-migrations            #    0.002 K/sec                  
+S0-C2           1               1769      page-faults               #    0.068 K/sec                  
+S0-C2           1        31441400587      cycles                    #    1.203 GHz                    
+S0-C2           1        21173764966      instructions              #    0.67  insn per cycle         
+S0-C2           1         1947979453      branches                  #   74.518 M/sec                  
+S0-C2           1           26230350      branch-misses             #    1.35% of all branches        
+S0-C3           1           26141.14 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               4245      context-switches          #    0.162 K/sec                  
+S0-C3           1                 41      cpu-migrations            #    0.002 K/sec                  
+S0-C3           1                752      page-faults               #    0.029 K/sec                  
+S0-C3           1        34432142595      cycles                    #    1.317 GHz                    
+S0-C3           1        24554077127      instructions              #    0.71  insn per cycle         
+S0-C3           1         2246182129      branches                  #   85.925 M/sec                  
+S0-C3           1           41366547      branch-misses             #    1.84% of all branches        
+
+      26.142672640 seconds time elapsed
+
+================================================================================
+================================================================================
+Running run_forest_importances_faces test
+perf stat -o ../output/run_forest_importances_faces.log --per-core -a taskset -c 0-3 ./run_forest_importances_faces.sh -n 4
+
+=================================================
+Pixel importances with a parallel forest of trees
+=================================================
+
+This example shows the use of forests of trees to evaluate the importance
+of the pixels in an image classification task (faces). The hotter the pixel,
+the more important.
+
+The code below also illustrates how the construction and the computation
+of the predictions can be parallelized within multiple jobs.
+
+=================================================
+Pixel importances with a parallel forest of trees
+=================================================
+
+This example shows the use of forests of trees to evaluate the importance
+of the pixels in an image classification task (faces). The hotter the pixel,
+the more important.
+
+The code below also illustrates how the construction and the computation
+of the predictions can be parallelized within multiple jobs.
+
+=================================================
+Pixel importances with a parallel forest of trees
+=================================================
+
+This example shows the use of forests of trees to evaluate the importance
+of the pixels in an image classification task (faces). The hotter the pixel,
+the more important.
+
+The code below also illustrates how the construction and the computation
+of the predictions can be parallelized within multiple jobs.
+
+
+=================================================
+Pixel importances with a parallel forest of trees
+=================================================
+
+This example shows the use of forests of trees to evaluate the importance
+of the pixels in an image classification task (faces). The hotter the pixel,
+the more important.
+
+The code below also illustrates how the construction and the computation
+of the predictions can be parallelized within multiple jobs.
+
+
+
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+Fitting ExtraTreesClassifier on faces data with 1 cores...
+Fitting ExtraTreesClassifier on faces data with 1 cores...
+Fitting ExtraTreesClassifier on faces data with 1 cores...
+Fitting ExtraTreesClassifier on faces data with 1 cores...
+done in 7.282s
+done in 7.318s
+done in 7.323s
+done in 7.379s
+/root/i-benchmarks/scikit/bin
+# started on Wed Feb 24 04:21:11 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           36528.40 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1              14415      context-switches          #    0.395 K/sec                  
+S0-C0           1                882      cpu-migrations            #    0.024 K/sec                  
+S0-C0           1              39672      page-faults               #    0.001 M/sec                  
+S0-C0           1        19469963323      cycles                    #    0.533 GHz                    
+S0-C0           1         6998649936      instructions              #    0.36  insn per cycle         
+S0-C0           1          815412486      branches                  #   22.323 M/sec                  
+S0-C0           1          151136558      branch-misses             #   18.53% of all branches        
+S0-C1           1           36528.25 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1              14792      context-switches          #    0.405 K/sec                  
+S0-C1           1               1267      cpu-migrations            #    0.035 K/sec                  
+S0-C1           1              45975      page-faults               #    0.001 M/sec                  
+S0-C1           1        20074348285      cycles                    #    0.550 GHz                    
+S0-C1           1         7337431974      instructions              #    0.37  insn per cycle         
+S0-C1           1          822973337      branches                  #   22.530 M/sec                  
+S0-C1           1          132442352      branch-misses             #   16.09% of all branches        
+S0-C2           1           36528.29 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1              15021      context-switches          #    0.411 K/sec                  
+S0-C2           1               1161      cpu-migrations            #    0.032 K/sec                  
+S0-C2           1              40463      page-faults               #    0.001 M/sec                  
+S0-C2           1        20175743273      cycles                    #    0.552 GHz                    
+S0-C2           1         7332006430      instructions              #    0.36  insn per cycle         
+S0-C2           1          828224503      branches                  #   22.674 M/sec                  
+S0-C2           1          128279529      branch-misses             #   15.49% of all branches        
+S0-C3           1           36528.30 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1              14530      context-switches          #    0.398 K/sec                  
+S0-C3           1               1107      cpu-migrations            #    0.030 K/sec                  
+S0-C3           1              46800      page-faults               #    0.001 M/sec                  
+S0-C3           1        19994929252      cycles                    #    0.547 GHz                    
+S0-C3           1         7297149225      instructions              #    0.36  insn per cycle         
+S0-C3           1          817248886      branches                  #   22.373 M/sec                  
+S0-C3           1          132265098      branch-misses             #   16.18% of all branches        
+
+      36.530438763 seconds time elapsed
+
+================================================================================
+Running run_multioutput_face_completion test
+perf stat -o ../output/run_multioutput_face_completion.log --per-core -a taskset -c 0-3 ./run_multioutput_face_completion.sh -n 4
+
+==============================================
+Face completion with a multi-output estimators
+==============================================
+
+This example shows the use of multi-output estimator to complete images.
+The goal is to predict the lower half of a face given its upper half.
+
+The first column of images shows true faces. The next columns illustrate
+how extremely randomized trees, k nearest neighbors, linear
+regression and ridge regression complete the lower half of those faces.
+
+
+==============================================
+Face completion with a multi-output estimators
+==============================================
+
+This example shows the use of multi-output estimator to complete images.
+The goal is to predict the lower half of a face given its upper half.
+
+The first column of images shows true faces. The next columns illustrate
+how extremely randomized trees, k nearest neighbors, linear
+regression and ridge regression complete the lower half of those faces.
+
+
+
+==============================================
+Face completion with a multi-output estimators
+==============================================
+
+This example shows the use of multi-output estimator to complete images.
+The goal is to predict the lower half of a face given its upper half.
+
+The first column of images shows true faces. The next columns illustrate
+how extremely randomized trees, k nearest neighbors, linear
+regression and ridge regression complete the lower half of those faces.
+
+
+
+
+==============================================
+Face completion with a multi-output estimators
+==============================================
+
+This example shows the use of multi-output estimator to complete images.
+The goal is to predict the lower half of a face given its upper half.
+
+The first column of images shows true faces. The next columns illustrate
+how extremely randomized trees, k nearest neighbors, linear
+regression and ridge regression complete the lower half of those faces.
+
+
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/root/i-benchmarks/scikit/bin
+# started on Wed Feb 24 04:21:48 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1          700921.29 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1             290241      context-switches          #    0.414 K/sec                  
+S0-C0           1               2642      cpu-migrations            #    0.004 K/sec                  
+S0-C0           1             109202      page-faults               #    0.156 K/sec                  
+S0-C0           1        71052291906      cycles                    #    0.101 GHz                    
+S0-C0           1        31021196764      instructions              #    0.44  insn per cycle         
+S0-C0           1         2716113865      branches                  #    3.875 M/sec                  
+S0-C0           1          357565152      branch-misses             #   13.16% of all branches        
+S0-C1           1          700921.30 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1             281169      context-switches          #    0.401 K/sec                  
+S0-C1           1               3007      cpu-migrations            #    0.004 K/sec                  
+S0-C1           1             132003      page-faults               #    0.188 K/sec                  
+S0-C1           1       110490498642      cycles                    #    0.158 GHz                    
+S0-C1           1        62465761223      instructions              #    0.57  insn per cycle         
+S0-C1           1         7826065959      branches                  #   11.165 M/sec                  
+S0-C1           1          645065940      branch-misses             #    8.24% of all branches        
+S0-C2           1          700921.30 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1             336281      context-switches          #    0.480 K/sec                  
+S0-C2           1               2628      cpu-migrations            #    0.004 K/sec                  
+S0-C2           1             140482      page-faults               #    0.200 K/sec                  
+S0-C2           1        71863228620      cycles                    #    0.103 GHz                    
+S0-C2           1        34830454703      instructions              #    0.48  insn per cycle         
+S0-C2           1         3051043007      branches                  #    4.353 M/sec                  
+S0-C2           1          257638682      branch-misses             #    8.44% of all branches        
+S0-C3           1          700921.38 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1             312860      context-switches          #    0.446 K/sec                  
+S0-C3           1               2724      cpu-migrations            #    0.004 K/sec                  
+S0-C3           1             149620      page-faults               #    0.213 K/sec                  
+S0-C3           1       123373024851      cycles                    #    0.176 GHz                    
+S0-C3           1        74372160044      instructions              #    0.60  insn per cycle         
+S0-C3           1         8452972537      branches                  #   12.060 M/sec                  
+S0-C3           1          554873116      branch-misses             #    6.56% of all branches        
+
+     700.931546393 seconds time elapsed
+
+================================================================================
+Running run_logistic_path test
+perf stat -o ../output/run_logistic_path.log --per-core -a taskset -c 0-3 ./run_logistic_path.sh -n 4
+
+==============================================
+Regularization path of L1- Logistic Regression
+==============================================
+
+
+Train l1-penalized logistic regression models on a binary classification
+problem derived from the Iris dataset.
+
+The models are ordered from strongest regularized to least regularized. The 4
+coefficients of the models are collected and plotted as a "regularization
+path": on the left-hand side of the figure (strong regularizers), all the
+coefficients are exactly 0. When regularization gets progressively looser,
+coefficients can get non-zero values one after the other.
+
+Here we choose the SAGA solver because it can efficiently optimize for the
+Logistic Regression loss with a non-smooth, sparsity inducing l1 penalty.
+
+Also note that we set a low value for the tolerance to make sure that the model
+has converged before collecting the coefficients.
+
+We also use warm_start=True which means that the coefficients of the models are
+reused to initialize the next model fit to speed-up the computation of the
+full-path.
+
+
+==============================================
+Regularization path of L1- Logistic Regression
+==============================================
+
+
+Train l1-penalized logistic regression models on a binary classification
+problem derived from the Iris dataset.
+
+The models are ordered from strongest regularized to least regularized. The 4
+coefficients of the models are collected and plotted as a "regularization
+path": on the left-hand side of the figure (strong regularizers), all the
+coefficients are exactly 0. When regularization gets progressively looser,
+coefficients can get non-zero values one after the other.
+
+Here we choose the SAGA solver because it can efficiently optimize for the
+Logistic Regression loss with a non-smooth, sparsity inducing l1 penalty.
+
+Also note that we set a low value for the tolerance to make sure that the model
+has converged before collecting the coefficients.
+
+We also use warm_start=True which means that the coefficients of the models are
+reused to initialize the next model fit to speed-up the computation of the
+full-path.
+
+
+
+==============================================
+Regularization path of L1- Logistic Regression
+==============================================
+
+
+Train l1-penalized logistic regression models on a binary classification
+problem derived from the Iris dataset.
+
+The models are ordered from strongest regularized to least regularized. The 4
+coefficients of the models are collected and plotted as a "regularization
+path": on the left-hand side of the figure (strong regularizers), all the
+coefficients are exactly 0. When regularization gets progressively looser,
+coefficients can get non-zero values one after the other.
+
+Here we choose the SAGA solver because it can efficiently optimize for the
+Logistic Regression loss with a non-smooth, sparsity inducing l1 penalty.
+
+Also note that we set a low value for the tolerance to make sure that the model
+has converged before collecting the coefficients.
+
+We also use warm_start=True which means that the coefficients of the models are
+reused to initialize the next model fit to speed-up the computation of the
+full-path.
+
+
+
+==============================================
+Regularization path of L1- Logistic Regression
+==============================================
+
+
+Train l1-penalized logistic regression models on a binary classification
+problem derived from the Iris dataset.
+
+The models are ordered from strongest regularized to least regularized. The 4
+coefficients of the models are collected and plotted as a "regularization
+path": on the left-hand side of the figure (strong regularizers), all the
+coefficients are exactly 0. When regularization gets progressively looser,
+coefficients can get non-zero values one after the other.
+
+Here we choose the SAGA solver because it can efficiently optimize for the
+Logistic Regression loss with a non-smooth, sparsity inducing l1 penalty.
+
+Also note that we set a low value for the tolerance to make sure that the model
+has converged before collecting the coefficients.
+
+We also use warm_start=True which means that the coefficients of the models are
+reused to initialize the next model fit to speed-up the computation of the
+full-path.
+
+
+
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+Computing regularization path ...
+Computing regularization path ...
+Computing regularization path ...
+Computing regularization path ...
+This took 22.896s
+This took 22.897s
+This took 23.614s
+This took 24.077s
+/root/i-benchmarks/scikit/bin
+# started on Wed Feb 24 04:33:29 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           30801.32 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1              14142      context-switches          #    0.459 K/sec                  
+S0-C0           1                705      cpu-migrations            #    0.023 K/sec                  
+S0-C0           1              21887      page-faults               #    0.711 K/sec                  
+S0-C0           1        42549358329      cycles                    #    1.381 GHz                    
+S0-C0           1        25583193496      instructions              #    0.60  insn per cycle         
+S0-C0           1         2677702280      branches                  #   86.935 M/sec                  
+S0-C0           1          162971253      branch-misses             #    6.09% of all branches        
+S0-C1           1           30801.26 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1              14294      context-switches          #    0.464 K/sec                  
+S0-C1           1               1085      cpu-migrations            #    0.035 K/sec                  
+S0-C1           1              27527      page-faults               #    0.894 K/sec                  
+S0-C1           1        42122597472      cycles                    #    1.368 GHz                    
+S0-C1           1        26287698823      instructions              #    0.62  insn per cycle         
+S0-C1           1         2720585880      branches                  #   88.327 M/sec                  
+S0-C1           1          149184524      branch-misses             #    5.48% of all branches        
+S0-C2           1           30801.28 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1              14223      context-switches          #    0.462 K/sec                  
+S0-C2           1                977      cpu-migrations            #    0.032 K/sec                  
+S0-C2           1              28595      page-faults               #    0.928 K/sec                  
+S0-C2           1        43669452054      cycles                    #    1.418 GHz                    
+S0-C2           1        26727631453      instructions              #    0.61  insn per cycle         
+S0-C2           1         2761959860      branches                  #   89.670 M/sec                  
+S0-C2           1          150184880      branch-misses             #    5.44% of all branches        
+S0-C3           1           30801.33 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1              13265      context-switches          #    0.431 K/sec                  
+S0-C3           1                979      cpu-migrations            #    0.032 K/sec                  
+S0-C3           1              30677      page-faults               #    0.996 K/sec                  
+S0-C3           1        41943024313      cycles                    #    1.362 GHz                    
+S0-C3           1        26154422891      instructions              #    0.62  insn per cycle         
+S0-C3           1         2695939525      branches                  #   87.527 M/sec                  
+S0-C3           1          146263366      branch-misses             #    5.43% of all branches        
+
+      30.802782999 seconds time elapsed
+
+================================================================================
+Running run_plot_svm_nonlinear test
+perf stat -o ../output/run_plot_svm_nonlinear.log --per-core -a taskset -c 0-3 ./run_plot_svm_nonlinear.sh -n 4
+
+==============
+Non-linear SVM
+==============
+
+Perform binary classification using non-linear SVC
+with RBF kernel. The target to predict is a XOR of the
+inputs.
+
+The color map illustrates the decision function learned by the SVC.
+
+
+==============
+Non-linear SVM
+==============
+
+Perform binary classification using non-linear SVC
+with RBF kernel. The target to predict is a XOR of the
+inputs.
+
+The color map illustrates the decision function learned by the SVC.
+
+
+==============
+Non-linear SVM
+==============
+
+Perform binary classification using non-linear SVC
+with RBF kernel. The target to predict is a XOR of the
+inputs.
+
+The color map illustrates the decision function learned by the SVC.
+
+
+==============
+Non-linear SVM
+==============
+
+Perform binary classification using non-linear SVC
+with RBF kernel. The target to predict is a XOR of the
+inputs.
+
+The color map illustrates the decision function learned by the SVC.
+
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/root/i-benchmarks/scikit/bin
+# started on Wed Feb 24 04:34:00 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           10331.73 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               1732      context-switches          #    0.168 K/sec                  
+S0-C0           1                 62      cpu-migrations            #    0.006 K/sec                  
+S0-C0           1              29446      page-faults               #    0.003 M/sec                  
+S0-C0           1        15426268798      cycles                    #    1.493 GHz                    
+S0-C0           1         8948795911      instructions              #    0.58  insn per cycle         
+S0-C0           1          936948693      branches                  #   90.687 M/sec                  
+S0-C0           1           57164756      branch-misses             #    6.10% of all branches        
+S0-C1           1           10331.73 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               1562      context-switches          #    0.151 K/sec                  
+S0-C1           1                 56      cpu-migrations            #    0.005 K/sec                  
+S0-C1           1              29000      page-faults               #    0.003 M/sec                  
+S0-C1           1        15439705244      cycles                    #    1.494 GHz                    
+S0-C1           1         8900529933      instructions              #    0.58  insn per cycle         
+S0-C1           1          931416244      branches                  #   90.151 M/sec                  
+S0-C1           1           56847108      branch-misses             #    6.10% of all branches        
+S0-C2           1           10331.73 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1                975      context-switches          #    0.094 K/sec                  
+S0-C2           1                 52      cpu-migrations            #    0.005 K/sec                  
+S0-C2           1              30114      page-faults               #    0.003 M/sec                  
+S0-C2           1        15457274973      cycles                    #    1.496 GHz                    
+S0-C2           1         8917412905      instructions              #    0.58  insn per cycle         
+S0-C2           1          932190787      branches                  #   90.226 M/sec                  
+S0-C2           1           55978033      branch-misses             #    6.00% of all branches        
+S0-C3           1           10331.73 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               1625      context-switches          #    0.157 K/sec                  
+S0-C3           1                 74      cpu-migrations            #    0.007 K/sec                  
+S0-C3           1              30319      page-faults               #    0.003 M/sec                  
+S0-C3           1        15424536195      cycles                    #    1.493 GHz                    
+S0-C3           1         8943294525      instructions              #    0.58  insn per cycle         
+S0-C3           1          935759401      branches                  #   90.571 M/sec                  
+S0-C3           1           56558750      branch-misses             #    6.04% of all branches        
+
+      10.333169284 seconds time elapsed
+
+================================================================================
+Running run_plot_theilsen test
+perf stat -o ../output/run_plot_theilsen.log --per-core -a taskset -c 0-3 ./run_plot_theilsen.sh -n 4
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/lib/python3/dist-packages/sklearn/externals/joblib.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+
+====================
+Theil-Sen Regression
+====================
+
+Computes a Theil-Sen Regression on a synthetic dataset.
+
+See :ref:`theil_sen_regression` for more information on the regressor.
+
+Compared to the OLS (ordinary least squares) estimator, the Theil-Sen
+estimator is robust against outliers. It has a breakdown point of about 29.3%
+in case of a simple linear regression which means that it can tolerate
+arbitrary corrupted data (outliers) of up to 29.3% in the two-dimensional
+case.
+
+The estimation of the model is done by calculating the slopes and intercepts
+of a subpopulation of all possible combinations of p subsample points. If an
+intercept is fitted, p must be greater than or equal to n_features + 1. The
+final slope and intercept is then defined as the spatial median of these
+slopes and intercepts.
+
+In certain cases Theil-Sen performs better than :ref:`RANSAC
+<ransac_regression>` which is also a robust method. This is illustrated in the
+second example below where outliers with respect to the x-axis perturb RANSAC.
+Tuning the ``residual_threshold`` parameter of RANSAC remedies this but in
+general a priori knowledge about the data and the nature of the outliers is
+needed.
+Due to the computational complexity of Theil-Sen it is recommended to use it
+only for small problems in terms of number of samples and features. For larger
+problems the ``max_subpopulation`` parameter restricts the magnitude of all
+possible combinations of p subsample points to a randomly chosen subset and
+therefore also limits the runtime. Therefore, Theil-Sen is applicable to larger
+problems with the drawback of losing some of its mathematical properties since
+it then works on a random subset.
+
+
+====================
+Theil-Sen Regression
+====================
+
+Computes a Theil-Sen Regression on a synthetic dataset.
+
+See :ref:`theil_sen_regression` for more information on the regressor.
+
+Compared to the OLS (ordinary least squares) estimator, the Theil-Sen
+estimator is robust against outliers. It has a breakdown point of about 29.3%
+in case of a simple linear regression which means that it can tolerate
+arbitrary corrupted data (outliers) of up to 29.3% in the two-dimensional
+case.
+
+The estimation of the model is done by calculating the slopes and intercepts
+of a subpopulation of all possible combinations of p subsample points. If an
+intercept is fitted, p must be greater than or equal to n_features + 1. The
+final slope and intercept is then defined as the spatial median of these
+slopes and intercepts.
+
+In certain cases Theil-Sen performs better than :ref:`RANSAC
+<ransac_regression>` which is also a robust method. This is illustrated in the
+second example below where outliers with respect to the x-axis perturb RANSAC.
+Tuning the ``residual_threshold`` parameter of RANSAC remedies this but in
+general a priori knowledge about the data and the nature of the outliers is
+needed.
+Due to the computational complexity of Theil-Sen it is recommended to use it
+only for small problems in terms of number of samples and features. For larger
+problems the ``max_subpopulation`` parameter restricts the magnitude of all
+possible combinations of p subsample points to a randomly chosen subset and
+therefore also limits the runtime. Therefore, Theil-Sen is applicable to larger
+problems with the drawback of losing some of its mathematical properties since
+it then works on a random subset.
+
+
+====================
+Theil-Sen Regression
+====================
+
+Computes a Theil-Sen Regression on a synthetic dataset.
+
+See :ref:`theil_sen_regression` for more information on the regressor.
+
+Compared to the OLS (ordinary least squares) estimator, the Theil-Sen
+estimator is robust against outliers. It has a breakdown point of about 29.3%
+in case of a simple linear regression which means that it can tolerate
+arbitrary corrupted data (outliers) of up to 29.3% in the two-dimensional
+case.
+
+The estimation of the model is done by calculating the slopes and intercepts
+of a subpopulation of all possible combinations of p subsample points. If an
+intercept is fitted, p must be greater than or equal to n_features + 1. The
+final slope and intercept is then defined as the spatial median of these
+slopes and intercepts.
+
+In certain cases Theil-Sen performs better than :ref:`RANSAC
+<ransac_regression>` which is also a robust method. This is illustrated in the
+second example below where outliers with respect to the x-axis perturb RANSAC.
+Tuning the ``residual_threshold`` parameter of RANSAC remedies this but in
+general a priori knowledge about the data and the nature of the outliers is
+needed.
+Due to the computational complexity of Theil-Sen it is recommended to use it
+only for small problems in terms of number of samples and features. For larger
+problems the ``max_subpopulation`` parameter restricts the magnitude of all
+possible combinations of p subsample points to a randomly chosen subset and
+therefore also limits the runtime. Therefore, Theil-Sen is applicable to larger
+problems with the drawback of losing some of its mathematical properties since
+it then works on a random subset.
+
+
+====================
+Theil-Sen Regression
+====================
+
+Computes a Theil-Sen Regression on a synthetic dataset.
+
+See :ref:`theil_sen_regression` for more information on the regressor.
+
+Compared to the OLS (ordinary least squares) estimator, the Theil-Sen
+estimator is robust against outliers. It has a breakdown point of about 29.3%
+in case of a simple linear regression which means that it can tolerate
+arbitrary corrupted data (outliers) of up to 29.3% in the two-dimensional
+case.
+
+The estimation of the model is done by calculating the slopes and intercepts
+of a subpopulation of all possible combinations of p subsample points. If an
+intercept is fitted, p must be greater than or equal to n_features + 1. The
+final slope and intercept is then defined as the spatial median of these
+slopes and intercepts.
+
+In certain cases Theil-Sen performs better than :ref:`RANSAC
+<ransac_regression>` which is also a robust method. This is illustrated in the
+second example below where outliers with respect to the x-axis perturb RANSAC.
+Tuning the ``residual_threshold`` parameter of RANSAC remedies this but in
+general a priori knowledge about the data and the nature of the outliers is
+needed.
+Due to the computational complexity of Theil-Sen it is recommended to use it
+only for small problems in terms of number of samples and features. For larger
+problems the ``max_subpopulation`` parameter restricts the magnitude of all
+possible combinations of p subsample points to a randomly chosen subset and
+therefore also limits the runtime. Therefore, Theil-Sen is applicable to larger
+problems with the drawback of losing some of its mathematical properties since
+it then works on a random subset.
+
+/root/i-benchmarks/scikit/bin
+# started on Wed Feb 24 04:34:10 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1          167373.31 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1             124894      context-switches          #    0.746 K/sec                  
+S0-C0           1                650      cpu-migrations            #    0.004 K/sec                  
+S0-C0           1              78909      page-faults               #    0.471 K/sec                  
+S0-C0           1        91523417426      cycles                    #    0.547 GHz                    
+S0-C0           1        60256368870      instructions              #    0.66  insn per cycle         
+S0-C0           1         9192185060      branches                  #   54.920 M/sec                  
+S0-C0           1          871152848      branch-misses             #    9.48% of all branches        
+S0-C1           1          167373.33 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1             162420      context-switches          #    0.970 K/sec                  
+S0-C1           1                634      cpu-migrations            #    0.004 K/sec                  
+S0-C1           1              59550      page-faults               #    0.356 K/sec                  
+S0-C1           1        32233522563      cycles                    #    0.193 GHz                    
+S0-C1           1        15903096414      instructions              #    0.49  insn per cycle         
+S0-C1           1         2060047248      branches                  #   12.308 M/sec                  
+S0-C1           1          315161502      branch-misses             #   15.30% of all branches        
+S0-C2           1          167373.33 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1             170971      context-switches          #    0.001 M/sec                  
+S0-C2           1                700      cpu-migrations            #    0.004 K/sec                  
+S0-C2           1              80928      page-faults               #    0.484 K/sec                  
+S0-C2           1        27278088284      cycles                    #    0.163 GHz                    
+S0-C2           1        12180705775      instructions              #    0.45  insn per cycle         
+S0-C2           1         1492428671      branches                  #    8.917 M/sec                  
+S0-C2           1          277567208      branch-misses             #   18.60% of all branches        
+S0-C3           1          167373.34 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1             115573      context-switches          #    0.691 K/sec                  
+S0-C3           1                680      cpu-migrations            #    0.004 K/sec                  
+S0-C3           1              85679      page-faults               #    0.512 K/sec                  
+S0-C3           1        39587027666      cycles                    #    0.237 GHz                    
+S0-C3           1        21947545408      instructions              #    0.55  insn per cycle         
+S0-C3           1         2905550727      branches                  #   17.360 M/sec                  
+S0-C3           1          336477103      branch-misses             #   11.58% of all branches        
+
+     167.377762747 seconds time elapsed
+
+================================================================================
+================================================================================
+perf stat -o 099_go.log --per-core -a taskset -c 0-3 ./spec95_099_go.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:36:58 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           30195.23 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               2198      context-switches          #    0.073 K/sec                  
+S0-C0           1                 27      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1                437      page-faults               #    0.014 K/sec                  
+S0-C0           1        45088128330      cycles                    #    1.493 GHz                    
+S0-C0           1        27223953563      instructions              #    0.60  insn per cycle         
+S0-C0           1         2631640366      branches                  #   87.154 M/sec                  
+S0-C0           1          913289610      branch-misses             #   34.70% of all branches        
+S0-C1           1           30195.42 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               1763      context-switches          #    0.058 K/sec                  
+S0-C1           1                 21      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1                748      page-faults               #    0.025 K/sec                  
+S0-C1           1        45051289484      cycles                    #    1.492 GHz                    
+S0-C1           1        27224166130      instructions              #    0.60  insn per cycle         
+S0-C1           1         2630055858      branches                  #   87.101 M/sec                  
+S0-C1           1          912008006      branch-misses             #   34.68% of all branches        
+S0-C2           1           30195.38 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1                578      context-switches          #    0.019 K/sec                  
+S0-C2           1                 22      cpu-migrations            #    0.001 K/sec                  
+S0-C2           1                554      page-faults               #    0.018 K/sec                  
+S0-C2           1        45007190688      cycles                    #    1.491 GHz                    
+S0-C2           1        27206469057      instructions              #    0.60  insn per cycle         
+S0-C2           1         2626552934      branches                  #   86.985 M/sec                  
+S0-C2           1          910768408      branch-misses             #   34.68% of all branches        
+S0-C3           1           30195.39 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               4540      context-switches          #    0.150 K/sec                  
+S0-C3           1                 23      cpu-migrations            #    0.001 K/sec                  
+S0-C3           1                882      page-faults               #    0.029 K/sec                  
+S0-C3           1        45238589972      cycles                    #    1.498 GHz                    
+S0-C3           1        27258625257      instructions              #    0.60  insn per cycle         
+S0-C3           1         2639685956      branches                  #   87.420 M/sec                  
+S0-C3           1          917038984      branch-misses             #   34.74% of all branches        
+
+      30.198403872 seconds time elapsed
+
+================================================================================
+perf stat -o 101_tomcatv.log --per-core -a taskset -c 0-3 ./spec95_101_tomcatv.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:37:28 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           62377.47 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               4943      context-switches          #    0.079 K/sec                  
+S0-C0           1                 55      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1               1471      page-faults               #    0.024 K/sec                  
+S0-C0           1        90452066052      cycles                    #    1.450 GHz                    
+S0-C0           1        16118876635      instructions              #    0.18  insn per cycle         
+S0-C0           1          859361005      branches                  #   13.777 M/sec                  
+S0-C0           1           18292399      branch-misses             #    2.13% of all branches        
+S0-C1           1           62377.48 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               4064      context-switches          #    0.065 K/sec                  
+S0-C1           1                 39      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1               1137      page-faults               #    0.018 K/sec                  
+S0-C1           1        90501301003      cycles                    #    1.451 GHz                    
+S0-C1           1        16111899062      instructions              #    0.18  insn per cycle         
+S0-C1           1          855090190      branches                  #   13.708 M/sec                  
+S0-C1           1           16895239      branch-misses             #    1.98% of all branches        
+S0-C2           1           62377.52 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               6340      context-switches          #    0.102 K/sec                  
+S0-C2           1                 27      cpu-migrations            #    0.000 K/sec                  
+S0-C2           1               1218      page-faults               #    0.020 K/sec                  
+S0-C2           1        90408689962      cycles                    #    1.449 GHz                    
+S0-C2           1        16084252308      instructions              #    0.18  insn per cycle         
+S0-C2           1          856410512      branches                  #   13.729 M/sec                  
+S0-C2           1           19767181      branch-misses             #    2.31% of all branches        
+S0-C3           1           62377.53 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               3796      context-switches          #    0.061 K/sec                  
+S0-C3           1                 39      cpu-migrations            #    0.001 K/sec                  
+S0-C3           1               2469      page-faults               #    0.040 K/sec                  
+S0-C3           1        90407852349      cycles                    #    1.449 GHz                    
+S0-C3           1        16115238322      instructions              #    0.18  insn per cycle         
+S0-C3           1          850765714      branches                  #   13.639 M/sec                  
+S0-C3           1           14339084      branch-misses             #    1.69% of all branches        
+
+      62.379124241 seconds time elapsed
+
+================================================================================
+perf stat -o 102_swim.log --per-core -a taskset -c 0-3 ./spec95_102_swim.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:38:31 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           59451.23 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               5619      context-switches          #    0.095 K/sec                  
+S0-C0           1                 36      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1                982      page-faults               #    0.017 K/sec                  
+S0-C0           1        88838813620      cycles                    #    1.494 GHz                    
+S0-C0           1         6094579768      instructions              #    0.07  insn per cycle         
+S0-C0           1          194637250      branches                  #    3.274 M/sec                  
+S0-C0           1            8692311      branch-misses             #    4.47% of all branches        
+S0-C1           1           59451.32 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               4012      context-switches          #    0.067 K/sec                  
+S0-C1           1                 26      cpu-migrations            #    0.000 K/sec                  
+S0-C1           1                870      page-faults               #    0.015 K/sec                  
+S0-C1           1        88884726307      cycles                    #    1.495 GHz                    
+S0-C1           1         6070766027      instructions              #    0.07  insn per cycle         
+S0-C1           1          189123628      branches                  #    3.181 M/sec                  
+S0-C1           1            7437257      branch-misses             #    3.93% of all branches        
+S0-C2           1           59451.33 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               6368      context-switches          #    0.107 K/sec                  
+S0-C2           1                 40      cpu-migrations            #    0.001 K/sec                  
+S0-C2           1                823      page-faults               #    0.014 K/sec                  
+S0-C2           1        89092933865      cycles                    #    1.499 GHz                    
+S0-C2           1         6095050363      instructions              #    0.07  insn per cycle         
+S0-C2           1          196300757      branches                  #    3.302 M/sec                  
+S0-C2           1           11479953      branch-misses             #    5.85% of all branches        
+S0-C3           1           59451.30 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1                957      context-switches          #    0.016 K/sec                  
+S0-C3           1                 19      cpu-migrations            #    0.000 K/sec                  
+S0-C3           1                892      page-faults               #    0.015 K/sec                  
+S0-C3           1        88957972194      cycles                    #    1.496 GHz                    
+S0-C3           1         6078635487      instructions              #    0.07  insn per cycle         
+S0-C3           1          184254924      branches                  #    3.099 M/sec                  
+S0-C3           1            3812459      branch-misses             #    2.07% of all branches        
+
+      59.454991510 seconds time elapsed
+
+================================================================================
+perf stat -o 103_su2cor.log --per-core -a taskset -c 0-3 ./spec95_103_su2cor.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:39:30 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           99307.66 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1              10504      context-switches          #    0.106 K/sec                  
+S0-C0           1                 85      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1                898      page-faults               #    0.009 K/sec                  
+S0-C0           1       138082100403      cycles                    #    1.390 GHz                    
+S0-C0           1        21564505982      instructions              #    0.16  insn per cycle         
+S0-C0           1         1222936633      branches                  #   12.315 M/sec                  
+S0-C0           1          100352843      branch-misses             #    8.21% of all branches        
+S0-C1           1           99307.67 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1              10102      context-switches          #    0.102 K/sec                  
+S0-C1           1                 70      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1               1445      page-faults               #    0.015 K/sec                  
+S0-C1           1       137027185243      cycles                    #    1.380 GHz                    
+S0-C1           1        21464307339      instructions              #    0.16  insn per cycle         
+S0-C1           1         1210936442      branches                  #   12.194 M/sec                  
+S0-C1           1          100036245      branch-misses             #    8.26% of all branches        
+S0-C2           1           99307.70 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               7050      context-switches          #    0.071 K/sec                  
+S0-C2           1                 61      cpu-migrations            #    0.001 K/sec                  
+S0-C2           1               1293      page-faults               #    0.013 K/sec                  
+S0-C2           1       134412226414      cycles                    #    1.353 GHz                    
+S0-C2           1        21454749661      instructions              #    0.16  insn per cycle         
+S0-C2           1         1211227378      branches                  #   12.197 M/sec                  
+S0-C2           1          100302319      branch-misses             #    8.28% of all branches        
+S0-C3           1           99308.10 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               3486      context-switches          #    0.035 K/sec                  
+S0-C3           1                 45      cpu-migrations            #    0.000 K/sec                  
+S0-C3           1               1097      page-faults               #    0.011 K/sec                  
+S0-C3           1       136191981571      cycles                    #    1.371 GHz                    
+S0-C3           1        21394169626      instructions              #    0.16  insn per cycle         
+S0-C3           1         1190389278      branches                  #   11.987 M/sec                  
+S0-C3           1           89387155      branch-misses             #    7.51% of all branches        
+
+      99.310419288 seconds time elapsed
+
+================================================================================
+perf stat -o 104_hydro2d.log --per-core -a taskset -c 0-3 ./spec95_104_hydro2d.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:41:10 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           72359.11 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               7075      context-switches          #    0.098 K/sec                  
+S0-C0           1                 52      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1               1028      page-faults               #    0.014 K/sec                  
+S0-C0           1       108244514648      cycles                    #    1.496 GHz                    
+S0-C0           1        31541231262      instructions              #    0.29  insn per cycle         
+S0-C0           1         2625742367      branches                  #   36.288 M/sec                  
+S0-C0           1           23685388      branch-misses             #    0.90% of all branches        
+S0-C1           1           72359.11 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               2440      context-switches          #    0.034 K/sec                  
+S0-C1           1                 32      cpu-migrations            #    0.000 K/sec                  
+S0-C1           1               1008      page-faults               #    0.014 K/sec                  
+S0-C1           1       107846088931      cycles                    #    1.490 GHz                    
+S0-C1           1        31435547317      instructions              #    0.29  insn per cycle         
+S0-C1           1         2606784768      branches                  #   36.026 M/sec                  
+S0-C1           1           17215084      branch-misses             #    0.66% of all branches        
+S0-C2           1           72359.13 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               8025      context-switches          #    0.111 K/sec                  
+S0-C2           1                 40      cpu-migrations            #    0.001 K/sec                  
+S0-C2           1                738      page-faults               #    0.010 K/sec                  
+S0-C2           1       108119711393      cycles                    #    1.494 GHz                    
+S0-C2           1        31497962911      instructions              #    0.29  insn per cycle         
+S0-C2           1         2624080500      branches                  #   36.265 M/sec                  
+S0-C2           1           26175360      branch-misses             #    1.00% of all branches        
+S0-C3           1           72359.11 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               3101      context-switches          #    0.043 K/sec                  
+S0-C3           1                 28      cpu-migrations            #    0.000 K/sec                  
+S0-C3           1                899      page-faults               #    0.012 K/sec                  
+S0-C3           1       107934742405      cycles                    #    1.492 GHz                    
+S0-C3           1        31494583607      instructions              #    0.29  insn per cycle         
+S0-C3           1         2615818707      branches                  #   36.151 M/sec                  
+S0-C3           1           20273050      branch-misses             #    0.78% of all branches        
+
+      72.361436051 seconds time elapsed
+
+================================================================================
+perf stat -o 107_mgrid.log --per-core -a taskset -c 0-3 ./spec95_107_mgrid.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:42:22 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           58818.18 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               2761      context-switches          #    0.047 K/sec                  
+S0-C0           1                 42      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1               1082      page-faults               #    0.018 K/sec                  
+S0-C0           1        88198723892      cycles                    #    1.500 GHz                    
+S0-C0           1        30199852425      instructions              #    0.34  insn per cycle         
+S0-C0           1          711675332      branches                  #   12.100 M/sec                  
+S0-C0           1           37429419      branch-misses             #    5.26% of all branches        
+S0-C1           1           58818.27 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               5949      context-switches          #    0.101 K/sec                  
+S0-C1           1                 41      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1               1070      page-faults               #    0.018 K/sec                  
+S0-C1           1        88180743496      cycles                    #    1.499 GHz                    
+S0-C1           1        30199114845      instructions              #    0.34  insn per cycle         
+S0-C1           1          711984066      branches                  #   12.105 M/sec                  
+S0-C1           1           37835543      branch-misses             #    5.31% of all branches        
+S0-C2           1           58818.27 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               4546      context-switches          #    0.077 K/sec                  
+S0-C2           1                 28      cpu-migrations            #    0.000 K/sec                  
+S0-C2           1               1206      page-faults               #    0.021 K/sec                  
+S0-C2           1        88141784001      cycles                    #    1.499 GHz                    
+S0-C2           1        30210954084      instructions              #    0.34  insn per cycle         
+S0-C2           1          718298783      branches                  #   12.212 M/sec                  
+S0-C2           1           41816841      branch-misses             #    5.82% of all branches        
+S0-C3           1           58818.27 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               3574      context-switches          #    0.061 K/sec                  
+S0-C3           1                 40      cpu-migrations            #    0.001 K/sec                  
+S0-C3           1               1209      page-faults               #    0.021 K/sec                  
+S0-C3           1        88161235642      cycles                    #    1.499 GHz                    
+S0-C3           1        30222332926      instructions              #    0.34  insn per cycle         
+S0-C3           1          715930967      branches                  #   12.172 M/sec                  
+S0-C3           1           38375187      branch-misses             #    5.36% of all branches        
+
+      58.819980717 seconds time elapsed
+
+================================================================================
+perf stat -o 110_applu.log --per-core -a taskset -c 0-3 ./spec95_110_applu.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:43:21 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           67960.14 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               5740      context-switches          #    0.084 K/sec                  
+S0-C0           1                 54      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1               1231      page-faults               #    0.018 K/sec                  
+S0-C0           1       101816733945      cycles                    #    1.498 GHz                    
+S0-C0           1        21915660332      instructions              #    0.22  insn per cycle         
+S0-C0           1          357799085      branches                  #    5.265 M/sec                  
+S0-C0           1           16374735      branch-misses             #    4.58% of all branches        
+S0-C1           1           67960.59 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               5361      context-switches          #    0.079 K/sec                  
+S0-C1           1                 37      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1               1214      page-faults               #    0.018 K/sec                  
+S0-C1           1       101796880829      cycles                    #    1.498 GHz                    
+S0-C1           1        21852845250      instructions              #    0.21  insn per cycle         
+S0-C1           1          343208962      branches                  #    5.050 M/sec                  
+S0-C1           1           10406610      branch-misses             #    3.03% of all branches        
+S0-C2           1           67960.55 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               5805      context-switches          #    0.085 K/sec                  
+S0-C2           1                 25      cpu-migrations            #    0.000 K/sec                  
+S0-C2           1               1133      page-faults               #    0.017 K/sec                  
+S0-C2           1       101784826925      cycles                    #    1.498 GHz                    
+S0-C2           1        21875520045      instructions              #    0.21  insn per cycle         
+S0-C2           1          355436520      branches                  #    5.230 M/sec                  
+S0-C2           1           17954124      branch-misses             #    5.05% of all branches        
+S0-C3           1           67960.59 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               2795      context-switches          #    0.041 K/sec                  
+S0-C3           1                 23      cpu-migrations            #    0.000 K/sec                  
+S0-C3           1                981      page-faults               #    0.014 K/sec                  
+S0-C3           1       101908248722      cycles                    #    1.500 GHz                    
+S0-C3           1        21912970140      instructions              #    0.22  insn per cycle         
+S0-C3           1          352732198      branches                  #    5.190 M/sec                  
+S0-C3           1           13071082      branch-misses             #    3.71% of all branches        
+
+      67.963622534 seconds time elapsed
+
+================================================================================
+perf stat -o 125_turb3d.log --per-core -a taskset -c 0-3 ./spec95_125_turb3d.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:44:29 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           69414.40 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               4718      context-switches          #    0.068 K/sec                  
+S0-C0           1                 44      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1                897      page-faults               #    0.013 K/sec                  
+S0-C0           1       104087194331      cycles                    #    1.500 GHz                    
+S0-C0           1        62028495056      instructions              #    0.60  insn per cycle         
+S0-C0           1         3573335780      branches                  #   51.478 M/sec                  
+S0-C0           1          264656867      branch-misses             #    7.41% of all branches        
+S0-C1           1           69414.29 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               6036      context-switches          #    0.087 K/sec                  
+S0-C1           1                 31      cpu-migrations            #    0.000 K/sec                  
+S0-C1           1               1091      page-faults               #    0.016 K/sec                  
+S0-C1           1       103940690589      cycles                    #    1.497 GHz                    
+S0-C1           1        61963375164      instructions              #    0.60  insn per cycle         
+S0-C1           1         3566036880      branches                  #   51.373 M/sec                  
+S0-C1           1          263397388      branch-misses             #    7.39% of all branches        
+S0-C2           1           69414.30 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               4304      context-switches          #    0.062 K/sec                  
+S0-C2           1                 22      cpu-migrations            #    0.000 K/sec                  
+S0-C2           1                981      page-faults               #    0.014 K/sec                  
+S0-C2           1       103979504670      cycles                    #    1.498 GHz                    
+S0-C2           1        61961387623      instructions              #    0.60  insn per cycle         
+S0-C2           1         3567375200      branches                  #   51.393 M/sec                  
+S0-C2           1          264976837      branch-misses             #    7.43% of all branches        
+S0-C3           1           69414.30 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               4283      context-switches          #    0.062 K/sec                  
+S0-C3           1                 23      cpu-migrations            #    0.000 K/sec                  
+S0-C3           1               1073      page-faults               #    0.015 K/sec                  
+S0-C3           1       103986185722      cycles                    #    1.498 GHz                    
+S0-C3           1        61965099566      instructions              #    0.60  insn per cycle         
+S0-C3           1         3565962599      branches                  #   51.372 M/sec                  
+S0-C3           1          266982255      branch-misses             #    7.49% of all branches        
+
+      69.416672727 seconds time elapsed
+
+================================================================================
+perf stat -o 126_gcc.log --per-core -a taskset -c 0-3 ./spec95_126_gcc.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:45:39 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1            3717.40 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1                594      context-switches          #    0.160 K/sec                  
+S0-C0           1                 20      cpu-migrations            #    0.005 K/sec                  
+S0-C0           1               4959      page-faults               #    0.001 M/sec                  
+S0-C0           1         5471659635      cycles                    #    1.472 GHz                    
+S0-C0           1         3341568879      instructions              #    0.61  insn per cycle         
+S0-C0           1          457649112      branches                  #  123.110 M/sec                  
+S0-C0           1           75385080      branch-misses             #   16.47% of all branches        
+S0-C1           1            3717.34 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1                435      context-switches          #    0.117 K/sec                  
+S0-C1           1                 20      cpu-migrations            #    0.005 K/sec                  
+S0-C1           1               4729      page-faults               #    0.001 M/sec                  
+S0-C1           1         5473629649      cycles                    #    1.472 GHz                    
+S0-C1           1         3343846753      instructions              #    0.61  insn per cycle         
+S0-C1           1          457713700      branches                  #  123.129 M/sec                  
+S0-C1           1           75310838      branch-misses             #   16.45% of all branches        
+S0-C2           1            3717.40 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1                324      context-switches          #    0.087 K/sec                  
+S0-C2           1                 20      cpu-migrations            #    0.005 K/sec                  
+S0-C2           1               4120      page-faults               #    0.001 M/sec                  
+S0-C2           1         5498491293      cycles                    #    1.479 GHz                    
+S0-C2           1         3342152384      instructions              #    0.61  insn per cycle         
+S0-C2           1          457790091      branches                  #  123.148 M/sec                  
+S0-C2           1           75297467      branch-misses             #   16.45% of all branches        
+S0-C3           1            3717.42 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1                790      context-switches          #    0.213 K/sec                  
+S0-C3           1                 12      cpu-migrations            #    0.003 K/sec                  
+S0-C3           1               4108      page-faults               #    0.001 M/sec                  
+S0-C3           1         5486195885      cycles                    #    1.476 GHz                    
+S0-C3           1         3338252403      instructions              #    0.61  insn per cycle         
+S0-C3           1          456601613      branches                  #  122.827 M/sec                  
+S0-C3           1           74706195      branch-misses             #   16.36% of all branches        
+
+       3.719053328 seconds time elapsed
+
+================================================================================
+perf stat -o 129_compress.log --per-core -a taskset -c 0-3 ./spec95_129_compress.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:45:42 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           97959.65 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               8922      context-switches          #    0.091 K/sec                  
+S0-C0           1                 63      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1                676      page-faults               #    0.007 K/sec                  
+S0-C0           1       139166293442      cycles                    #    1.421 GHz                    
+S0-C0           1        35682494577      instructions              #    0.26  insn per cycle         
+S0-C0           1         3717155142      branches                  #   37.946 M/sec                  
+S0-C0           1          522653865      branch-misses             #   14.06% of all branches        
+S0-C1           1           97959.65 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               2876      context-switches          #    0.029 K/sec                  
+S0-C1           1                 46      cpu-migrations            #    0.000 K/sec                  
+S0-C1           1                786      page-faults               #    0.008 K/sec                  
+S0-C1           1       146073742724      cycles                    #    1.491 GHz                    
+S0-C1           1        35508633891      instructions              #    0.24  insn per cycle         
+S0-C1           1         3684819650      branches                  #   37.616 M/sec                  
+S0-C1           1          512375113      branch-misses             #   13.91% of all branches        
+S0-C2           1           97959.69 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               8579      context-switches          #    0.088 K/sec                  
+S0-C2           1                 18      cpu-migrations            #    0.000 K/sec                  
+S0-C2           1                722      page-faults               #    0.007 K/sec                  
+S0-C2           1       146711170078      cycles                    #    1.498 GHz                    
+S0-C2           1        35579782739      instructions              #    0.24  insn per cycle         
+S0-C2           1         3708156061      branches                  #   37.854 M/sec                  
+S0-C2           1          524861032      branch-misses             #   14.15% of all branches        
+S0-C3           1           97959.82 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               6857      context-switches          #    0.070 K/sec                  
+S0-C3           1                 28      cpu-migrations            #    0.000 K/sec                  
+S0-C3           1                859      page-faults               #    0.009 K/sec                  
+S0-C3           1       145913155669      cycles                    #    1.490 GHz                    
+S0-C3           1        35611193470      instructions              #    0.24  insn per cycle         
+S0-C3           1         3699922053      branches                  #   37.770 M/sec                  
+S0-C3           1          516697787      branch-misses             #   13.97% of all branches        
+
+      97.962793906 seconds time elapsed
+
+================================================================================
+perf stat -o 130_li.log --per-core -a taskset -c 0-3 ./spec95_130_li.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:47:20 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           49501.38 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               5608      context-switches          #    0.113 K/sec                  
+S0-C0           1                 47      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1                520      page-faults               #    0.011 K/sec                  
+S0-C0           1        74219797703      cycles                    #    1.499 GHz                    
+S0-C0           1        48511044315      instructions              #    0.65  insn per cycle         
+S0-C0           1         6167267382      branches                  #  124.588 M/sec                  
+S0-C0           1          783407303      branch-misses             #   12.70% of all branches        
+S0-C1           1           49501.45 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               2761      context-switches          #    0.056 K/sec                  
+S0-C1           1                 37      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1                217      page-faults               #    0.004 K/sec                  
+S0-C1           1        74140283845      cycles                    #    1.498 GHz                    
+S0-C1           1        48473694068      instructions              #    0.65  insn per cycle         
+S0-C1           1         6160996298      branches                  #  124.461 M/sec                  
+S0-C1           1          781092171      branch-misses             #   12.68% of all branches        
+S0-C2           1           49501.35 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               3266      context-switches          #    0.066 K/sec                  
+S0-C2           1                 29      cpu-migrations            #    0.001 K/sec                  
+S0-C2           1                384      page-faults               #    0.008 K/sec                  
+S0-C2           1        74032192956      cycles                    #    1.496 GHz                    
+S0-C2           1        48491943554      instructions              #    0.66  insn per cycle         
+S0-C2           1         6167154031      branches                  #  124.586 M/sec                  
+S0-C2           1          783181288      branch-misses             #   12.70% of all branches        
+S0-C3           1           49501.85 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               2651      context-switches          #    0.054 K/sec                  
+S0-C3           1                 33      cpu-migrations            #    0.001 K/sec                  
+S0-C3           1                421      page-faults               #    0.009 K/sec                  
+S0-C3           1        74134561132      cycles                    #    1.498 GHz                    
+S0-C3           1        48461737532      instructions              #    0.65  insn per cycle         
+S0-C3           1         6158980155      branches                  #  124.419 M/sec                  
+S0-C3           1          777931338      branch-misses             #   12.63% of all branches        
+
+      49.504476214 seconds time elapsed
+
+================================================================================
+perf stat -o 132_ijpeg.log --per-core -a taskset -c 0-3 ./spec95_132_ijpeg.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:48:10 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           13975.41 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               2031      context-switches          #    0.145 K/sec                  
+S0-C0           1                 37      cpu-migrations            #    0.003 K/sec                  
+S0-C0           1               2506      page-faults               #    0.179 K/sec                  
+S0-C0           1        20854104764      cycles                    #    1.492 GHz                    
+S0-C0           1        21860415032      instructions              #    1.05  insn per cycle         
+S0-C0           1         1110552650      branches                  #   79.465 M/sec                  
+S0-C0           1          180730345      branch-misses             #   16.27% of all branches        
+S0-C1           1           13975.41 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               1384      context-switches          #    0.099 K/sec                  
+S0-C1           1                 15      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1               2727      page-faults               #    0.195 K/sec                  
+S0-C1           1        20859149102      cycles                    #    1.493 GHz                    
+S0-C1           1        21833912620      instructions              #    1.05  insn per cycle         
+S0-C1           1         1118839353      branches                  #   80.058 M/sec                  
+S0-C1           1          191604715      branch-misses             #   17.13% of all branches        
+S0-C2           1           13975.70 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1                638      context-switches          #    0.046 K/sec                  
+S0-C2           1                 34      cpu-migrations            #    0.002 K/sec                  
+S0-C2           1               2856      page-faults               #    0.204 K/sec                  
+S0-C2           1        18228156786      cycles                    #    1.304 GHz                    
+S0-C2           1        19073404969      instructions              #    1.05  insn per cycle         
+S0-C2           1          979108751      branches                  #   70.058 M/sec                  
+S0-C2           1          166874817      branch-misses             #   17.04% of all branches        
+S0-C3           1           13976.17 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1                907      context-switches          #    0.065 K/sec                  
+S0-C3           1                 30      cpu-migrations            #    0.002 K/sec                  
+S0-C3           1               2583      page-faults               #    0.185 K/sec                  
+S0-C3           1        19934727674      cycles                    #    1.426 GHz                    
+S0-C3           1        20999965131      instructions              #    1.05  insn per cycle         
+S0-C3           1         1069229631      branches                  #   76.504 M/sec                  
+S0-C3           1          178459455      branch-misses             #   16.69% of all branches        
+
+      13.977637549 seconds time elapsed
+
+================================================================================
+perf stat -o 134_perl.log --per-core -a taskset -c 0-3 ./spec95_134_perl.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:48:24 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           19425.60 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1                781      context-switches          #    0.040 K/sec                  
+S0-C0           1                 26      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1               9059      page-faults               #    0.466 K/sec                  
+S0-C0           1        29102621530      cycles                    #    1.498 GHz                    
+S0-C0           1        22297081790      instructions              #    0.77  insn per cycle         
+S0-C0           1         2740663089      branches                  #  141.085 M/sec                  
+S0-C0           1          217230150      branch-misses             #    7.93% of all branches        
+S0-C1           1           19425.59 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               1776      context-switches          #    0.091 K/sec                  
+S0-C1           1                 25      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1               9358      page-faults               #    0.482 K/sec                  
+S0-C1           1        28532079797      cycles                    #    1.469 GHz                    
+S0-C1           1        22326553608      instructions              #    0.78  insn per cycle         
+S0-C1           1         2743782974      branches                  #  141.246 M/sec                  
+S0-C1           1          213933543      branch-misses             #    7.80% of all branches        
+S0-C2           1           19425.92 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               1967      context-switches          #    0.101 K/sec                  
+S0-C2           1                 17      cpu-migrations            #    0.001 K/sec                  
+S0-C2           1               9365      page-faults               #    0.482 K/sec                  
+S0-C2           1        28716297890      cycles                    #    1.478 GHz                    
+S0-C2           1        22306166629      instructions              #    0.78  insn per cycle         
+S0-C2           1         2740501164      branches                  #  141.074 M/sec                  
+S0-C2           1          217507136      branch-misses             #    7.94% of all branches        
+S0-C3           1           19426.43 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               1218      context-switches          #    0.063 K/sec                  
+S0-C3           1                 19      cpu-migrations            #    0.001 K/sec                  
+S0-C3           1               9242      page-faults               #    0.476 K/sec                  
+S0-C3           1        28467205768      cycles                    #    1.465 GHz                    
+S0-C3           1        22309724010      instructions              #    0.78  insn per cycle         
+S0-C3           1         2741040880      branches                  #  141.099 M/sec                  
+S0-C3           1          213823507      branch-misses             #    7.80% of all branches        
+
+      19.428676412 seconds time elapsed
+
+================================================================================
+perf stat -o 141_apsi.log --per-core -a taskset -c 0-3 ./spec95_141_apsi.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:48:43 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           32335.77 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               2229      context-switches          #    0.069 K/sec                  
+S0-C0           1                 36      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1                904      page-faults               #    0.028 K/sec                  
+S0-C0           1        48291039650      cycles                    #    1.493 GHz                    
+S0-C0           1        19213199558      instructions              #    0.40  insn per cycle         
+S0-C0           1          864309787      branches                  #   26.729 M/sec                  
+S0-C0           1           28780282      branch-misses             #    3.33% of all branches        
+S0-C1           1           32335.78 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               2530      context-switches          #    0.078 K/sec                  
+S0-C1           1                 32      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1               1011      page-faults               #    0.031 K/sec                  
+S0-C1           1        48272885632      cycles                    #    1.493 GHz                    
+S0-C1           1        19210516334      instructions              #    0.40  insn per cycle         
+S0-C1           1          864557506      branches                  #   26.737 M/sec                  
+S0-C1           1           28947730      branch-misses             #    3.35% of all branches        
+S0-C2           1           32335.79 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               3756      context-switches          #    0.116 K/sec                  
+S0-C2           1                 47      cpu-migrations            #    0.001 K/sec                  
+S0-C2           1               1084      page-faults               #    0.034 K/sec                  
+S0-C2           1        48290666426      cycles                    #    1.493 GHz                    
+S0-C2           1        19231786875      instructions              #    0.40  insn per cycle         
+S0-C2           1          868448174      branches                  #   26.857 M/sec                  
+S0-C2           1           30737143      branch-misses             #    3.54% of all branches        
+S0-C3           1           32335.78 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               1492      context-switches          #    0.046 K/sec                  
+S0-C3           1                 24      cpu-migrations            #    0.001 K/sec                  
+S0-C3           1                887      page-faults               #    0.027 K/sec                  
+S0-C3           1        48183830505      cycles                    #    1.490 GHz                    
+S0-C3           1        19193597440      instructions              #    0.40  insn per cycle         
+S0-C3           1          860221715      branches                  #   26.603 M/sec                  
+S0-C3           1           26983714      branch-misses             #    3.14% of all branches        
+
+      32.337452081 seconds time elapsed
+
+================================================================================
+perf stat -o 145_fpppp.log --per-core -a taskset -c 0-3 ./spec95_145_fpppp.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:49:16 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           91820.27 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               8351      context-switches          #    0.091 K/sec                  
+S0-C0           1                 63      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1                300      page-faults               #    0.003 K/sec                  
+S0-C0           1       137702633996      cycles                    #    1.500 GHz                    
+S0-C0           1       102621791931      instructions              #    0.75  insn per cycle         
+S0-C0           1         1287448607      branches                  #   14.021 M/sec                  
+S0-C0           1          102390952      branch-misses             #    7.95% of all branches        
+S0-C1           1           91820.27 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               2435      context-switches          #    0.027 K/sec                  
+S0-C1           1                 46      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1                396      page-faults               #    0.004 K/sec                  
+S0-C1           1       137097725925      cycles                    #    1.493 GHz                    
+S0-C1           1       102447519299      instructions              #    0.75  insn per cycle         
+S0-C1           1         1253512111      branches                  #   13.652 M/sec                  
+S0-C1           1           91359113      branch-misses             #    7.29% of all branches        
+S0-C2           1           91820.28 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               7917      context-switches          #    0.086 K/sec                  
+S0-C2           1                 35      cpu-migrations            #    0.000 K/sec                  
+S0-C2           1                152      page-faults               #    0.002 K/sec                  
+S0-C2           1       137303323835      cycles                    #    1.495 GHz                    
+S0-C2           1       102469199446      instructions              #    0.75  insn per cycle         
+S0-C2           1         1267900412      branches                  #   13.809 M/sec                  
+S0-C2           1          100551881      branch-misses             #    7.93% of all branches        
+S0-C3           1           91820.27 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               7152      context-switches          #    0.078 K/sec                  
+S0-C3           1                 31      cpu-migrations            #    0.000 K/sec                  
+S0-C3           1                454      page-faults               #    0.005 K/sec                  
+S0-C3           1       136859103853      cycles                    #    1.491 GHz                    
+S0-C3           1       102468597134      instructions              #    0.75  insn per cycle         
+S0-C3           1         1265709414      branches                  #   13.785 M/sec                  
+S0-C3           1           98700621      branch-misses             #    7.80% of all branches        
+
+      91.823743541 seconds time elapsed
+
+================================================================================
+perf stat -o 146_wave5.log --per-core -a taskset -c 0-3 ./spec95_146_wave5.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:50:48 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           43533.29 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               3071      context-switches          #    0.071 K/sec                  
+S0-C0           1                 37      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1                926      page-faults               #    0.021 K/sec                  
+S0-C0           1        64852511973      cycles                    #    1.490 GHz                    
+S0-C0           1        19703016320      instructions              #    0.30  insn per cycle         
+S0-C0           1         1322272584      branches                  #   30.374 M/sec                  
+S0-C0           1           14382908      branch-misses             #    1.09% of all branches        
+S0-C1           1           43533.29 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               2817      context-switches          #    0.065 K/sec                  
+S0-C1           1                 22      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1               1027      page-faults               #    0.024 K/sec                  
+S0-C1           1        64915363398      cycles                    #    1.491 GHz                    
+S0-C1           1        19649969221      instructions              #    0.30  insn per cycle         
+S0-C1           1         1317440030      branches                  #   30.263 M/sec                  
+S0-C1           1           15438238      branch-misses             #    1.17% of all branches        
+S0-C2           1           43533.30 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               3474      context-switches          #    0.080 K/sec                  
+S0-C2           1                 20      cpu-migrations            #    0.000 K/sec                  
+S0-C2           1                783      page-faults               #    0.018 K/sec                  
+S0-C2           1        64836277483      cycles                    #    1.489 GHz                    
+S0-C2           1        19661620234      instructions              #    0.30  insn per cycle         
+S0-C2           1         1321311696      branches                  #   30.352 M/sec                  
+S0-C2           1           17638796      branch-misses             #    1.33% of all branches        
+S0-C3           1           43533.26 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               3171      context-switches          #    0.073 K/sec                  
+S0-C3           1                 15      cpu-migrations            #    0.000 K/sec                  
+S0-C3           1                872      page-faults               #    0.020 K/sec                  
+S0-C3           1        65239140566      cycles                    #    1.499 GHz                    
+S0-C3           1        19651271523      instructions              #    0.30  insn per cycle         
+S0-C3           1         1318223406      branches                  #   30.281 M/sec                  
+S0-C3           1           16049252      branch-misses             #    1.22% of all branches        
+
+      43.537801656 seconds time elapsed
+
+================================================================================
+perf stat -o 147_vortex.log --per-core -a taskset -c 0-3 ./spec95_147_vortex.sh -n 4
+/root/i-benchmarks/spec_95/bin
+# started on Wed Feb 24 04:51:31 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1           55183.91 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1               7185      context-switches          #    0.130 K/sec                  
+S0-C0           1                 48      cpu-migrations            #    0.001 K/sec                  
+S0-C0           1              11723      page-faults               #    0.212 K/sec                  
+S0-C0           1        82255888322      cycles                    #    1.491 GHz                    
+S0-C0           1        59266100274      instructions              #    0.72  insn per cycle         
+S0-C0           1         5841213154      branches                  #  105.850 M/sec                  
+S0-C0           1          101680505      branch-misses             #    1.74% of all branches        
+S0-C1           1           55184.07 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1               4025      context-switches          #    0.073 K/sec                  
+S0-C1           1                 34      cpu-migrations            #    0.001 K/sec                  
+S0-C1           1              11886      page-faults               #    0.215 K/sec                  
+S0-C1           1        80519077872      cycles                    #    1.459 GHz                    
+S0-C1           1        59234284015      instructions              #    0.74  insn per cycle         
+S0-C1           1         5833824342      branches                  #  105.716 M/sec                  
+S0-C1           1          100103974      branch-misses             #    1.72% of all branches        
+S0-C2           1           55184.23 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1               3191      context-switches          #    0.058 K/sec                  
+S0-C2           1                 25      cpu-migrations            #    0.000 K/sec                  
+S0-C2           1              12092      page-faults               #    0.219 K/sec                  
+S0-C2           1        80820346276      cycles                    #    1.465 GHz                    
+S0-C2           1        59234120439      instructions              #    0.73  insn per cycle         
+S0-C2           1         5833799208      branches                  #  105.715 M/sec                  
+S0-C2           1           98656904      branch-misses             #    1.69% of all branches        
+S0-C3           1           55184.25 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1               1127      context-switches          #    0.020 K/sec                  
+S0-C3           1                 36      cpu-migrations            #    0.001 K/sec                  
+S0-C3           1              12098      page-faults               #    0.219 K/sec                  
+S0-C3           1        80427629240      cycles                    #    1.457 GHz                    
+S0-C3           1        59212279106      instructions              #    0.74  insn per cycle         
+S0-C3           1         5827307087      branches                  #  105.597 M/sec                  
+S0-C3           1           94768631      branch-misses             #    1.63% of all branches        
+
+      55.185778607 seconds time elapsed
+
+================================================================================
+perf stat -o aes_benchmark.log --per-core -a taskset -c 0-3 ./aes_benchmark 4
+SUCCESS::pthread_create() succeeded
+SUCCESS::pthread_create() succeeded
+SUCCESS::pthread_create() succeeded
+SUCCESS::pthread_create() succeeded
+AES Tests: SUCCEEDED
+AES Tests: SUCCEEDED
+AES Tests: SUCCEEDED
+AES Tests: SUCCEEDED
+# started on Wed Feb 24 04:52:26 2021
+
+
+ Performance counter stats for 'system wide':
+
+S0-C0           1            3862.29 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C0           1                886      context-switches          #    0.229 K/sec                  
+S0-C0           1                100      cpu-migrations            #    0.026 K/sec                  
+S0-C0           1                303      page-faults               #    0.078 K/sec                  
+S0-C0           1         5745288375      cycles                    #    1.488 GHz                    
+S0-C0           1         7738624688      instructions              #    1.35  insn per cycle         
+S0-C0           1          180133498      branches                  #   46.639 M/sec                  
+S0-C0           1            3919069      branch-misses             #    2.18% of all branches        
+S0-C1           1            3862.29 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C1           1                591      context-switches          #    0.153 K/sec                  
+S0-C1           1                142      cpu-migrations            #    0.037 K/sec                  
+S0-C1           1                447      page-faults               #    0.116 K/sec                  
+S0-C1           1         5712188429      cycles                    #    1.479 GHz                    
+S0-C1           1         7727127077      instructions              #    1.35  insn per cycle         
+S0-C1           1          177543825      branches                  #   45.968 M/sec                  
+S0-C1           1            2849644      branch-misses             #    1.61% of all branches        
+S0-C2           1            3862.30 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C2           1                727      context-switches          #    0.188 K/sec                  
+S0-C2           1                131      cpu-migrations            #    0.034 K/sec                  
+S0-C2           1                448      page-faults               #    0.116 K/sec                  
+S0-C2           1         5715644070      cycles                    #    1.480 GHz                    
+S0-C2           1         7728607021      instructions              #    1.35  insn per cycle         
+S0-C2           1          178020826      branches                  #   46.092 M/sec                  
+S0-C2           1            3083375      branch-misses             #    1.73% of all branches        
+S0-C3           1            3862.30 msec cpu-clock                 #    1.000 CPUs utilized          
+S0-C3           1                480      context-switches          #    0.124 K/sec                  
+S0-C3           1                 52      cpu-migrations            #    0.013 K/sec                  
+S0-C3           1                447      page-faults               #    0.116 K/sec                  
+S0-C3           1         5737186774      cycles                    #    1.485 GHz                    
+S0-C3           1         7735281673      instructions              #    1.35  insn per cycle         
+S0-C3           1          179828931      branches                  #   46.560 M/sec                  
+S0-C3           1            3958386      branch-misses             #    2.20% of all branches        
+
+       3.863676637 seconds time elapsed
+
+================================================================================
+This benchmark has been compiled to use 16 threads. You have to repcompile it if you want to use different number of threads. See ../install/setup.sh for details.
+cp: cannot stat 'coremark_benchmark.log': No such file or directory
+================================================================================
+================================================================================
+Printing results
+File: 141_apsi.txt
+instructions: 76849100207
+=(19213199558+19210516334+19231786875+19193597440)
+frequencies: 1.492
+=(1.493+1.493+1.493+1.490)/4
+ipcs:0.40
+=1*(0.40+0.40+0.40+0.40)/4
+
+File: 145_fpppp.txt
+instructions: 410007107810
+=(102621791931+102447519299+102469199446+102468597134)
+frequencies: 1.495
+=(1.500+1.493+1.495+1.491)/4
+ipcs:0.75
+=1*(0.75+0.75+0.75+0.75)/4
+
+File: run_multioutput_face_completion.txt
+instructions: 202689572734
+=(31021196764+62465761223+34830454703+74372160044)
+frequencies: 0.135
+=(0.101+0.158+0.103+0.176)/4
+ipcs:0.52
+=1*(0.44+0.57+0.48+0.60)/4
+
+File: aes_benchmark.txt
+instructions: 30929640459
+=(7738624688+7727127077+7728607021+7735281673)
+frequencies: 1.483
+=(1.488+1.479+1.480+1.485)/4
+ipcs:1.35
+=1*(1.35+1.35+1.35+1.35)/4
+
+File: run_plot_theilsen.txt
+instructions: 110287716467
+=(60256368870+15903096414+12180705775+21947545408)
+frequencies: 0.285
+=(0.547+0.193+0.163+0.237)/4
+ipcs:0.54
+=1*(0.66+0.49+0.45+0.55)/4
+
+File: run_forest_importances_faces.txt
+instructions: 28965237565
+=(6998649936+7337431974+7332006430+7297149225)
+frequencies: 0.546
+=(0.533+0.550+0.552+0.547)/4
+ipcs:0.36
+=1*(0.36+0.37+0.36+0.36)/4
+
+File: 103_su2cor.txt
+instructions: 85877732608
+=(21564505982+21464307339+21454749661+21394169626)
+frequencies: 1.373
+=(1.390+1.380+1.353+1.371)/4
+ipcs:0.16
+=1*(0.16+0.16+0.16+0.16)/4
+
+File: 147_vortex.txt
+instructions: 236946783834
+=(59266100274+59234284015+59234120439+59212279106)
+frequencies: 1.468
+=(1.491+1.459+1.465+1.457)/4
+ipcs:0.73
+=1*(0.72+0.74+0.73+0.74)/4
+
+File: sqlite_4_threads.txt
+instructions: 19452656953
+=(4883314091+4856547582+4855470700+4857324580)
+frequencies: 1.472
+=(1.488+1.464+1.469+1.465)/4
+ipcs:0.68
+=1*(0.68+0.68+0.68+0.68)/4
+
+File: 104_hydro2d.txt
+instructions: 125969325097
+=(31541231262+31435547317+31497962911+31494583607)
+frequencies: 1.493
+=(1.496+1.490+1.494+1.492)/4
+ipcs:0.29
+=1*(0.29+0.29+0.29+0.29)/4
+
+File: go_word2vec_4_threads.txt
+instructions: 90095806511
+=(23794678368+20573286050+21173764966+24554077127)
+frequencies: 1.247
+=(1.294+1.172+1.203+1.317)/4
+ipcs:0.69
+=1*(0.70+0.67+0.67+0.71)/4
+
+File: run_plot_svm_nonlinear.txt
+instructions: 35710033274
+=(8948795911+8900529933+8917412905+8943294525)
+frequencies: 1.494
+=(1.493+1.494+1.496+1.493)/4
+ipcs:0.58
+=1*(0.58+0.58+0.58+0.58)/4
+
+File: 129_compress.txt
+instructions: 142382104677
+=(35682494577+35508633891+35579782739+35611193470)
+frequencies: 1.475
+=(1.421+1.491+1.498+1.490)/4
+ipcs:0.24
+=1*(0.26+0.24+0.24+0.24)/4
+
+File: 101_tomcatv.txt
+instructions: 64430266327
+=(16118876635+16111899062+16084252308+16115238322)
+frequencies: 1.450
+=(1.450+1.451+1.449+1.449)/4
+ipcs:0.18
+=1*(0.18+0.18+0.18+0.18)/4
+
+File: 102_swim.txt
+instructions: 24339031645
+=(6094579768+6070766027+6095050363+6078635487)
+frequencies: 1.496
+=(1.494+1.495+1.499+1.496)/4
+ipcs:0.07
+=1*(0.07+0.07+0.07+0.07)/4
+
+File: word2vec_perf_output_no_branch_1614140112659540792.txt
+instructions: 166668299918
+=(41314941576+40103645131+43355829681+41893883530)
+frequencies: 1.119
+=(1.115+1.078+1.157+1.127)/4
+ipcs:0.39
+=1*(0.39+0.39+0.39+0.39)/4
+
+File: 107_mgrid.txt
+instructions: 120832254280
+=(30199852425+30199114845+30210954084+30222332926)
+frequencies: 1.499
+=(1.500+1.499+1.499+1.499)/4
+ipcs:0.34
+=1*(0.34+0.34+0.34+0.34)/4
+
+File: 125_turb3d.txt
+instructions: 247918357409
+=(62028495056+61963375164+61961387623+61965099566)
+frequencies: 1.498
+=(1.500+1.497+1.498+1.498)/4
+ipcs:0.60
+=1*(0.60+0.60+0.60+0.60)/4
+
+File: word2vec_perf_output_1614140112655688899.txt
+instructions: 263568458153
+=(63875695873+58777592472+59924173210+80990996598)
+frequencies: 0.472
+=(0.460+0.430+0.442+0.554)/4
+ipcs:0.61
+=1*(0.61+0.60+0.59+0.64)/4
+
+File: 146_wave5.txt
+instructions: 78665877298
+=(19703016320+19649969221+19661620234+19651271523)
+frequencies: 1.492
+=(1.490+1.491+1.489+1.499)/4
+ipcs:0.30
+=1*(0.30+0.30+0.30+0.30)/4
+
+File: 134_perl.txt
+instructions: 89239526037
+=(22297081790+22326553608+22306166629+22309724010)
+frequencies: 1.478
+=(1.498+1.469+1.478+1.465)/4
+ipcs:0.78
+=1*(0.77+0.78+0.78+0.78)/4
+
+File: 099_go.txt
+instructions: 108913214007
+=(27223953563+27224166130+27206469057+27258625257)
+frequencies: 1.494
+=(1.493+1.492+1.491+1.498)/4
+ipcs:0.60
+=1*(0.60+0.60+0.60+0.60)/4
+
+File: 130_li.txt
+instructions: 193938419469
+=(48511044315+48473694068+48491943554+48461737532)
+frequencies: 1.498
+=(1.499+1.498+1.496+1.498)/4
+ipcs:0.65
+=1*(0.65+0.65+0.66+0.65)/4
+
+File: 132_ijpeg.txt
+instructions: 83767697752
+=(21860415032+21833912620+19073404969+20999965131)
+frequencies: 1.429
+=(1.492+1.493+1.304+1.426)/4
+ipcs:1.05
+=1*(1.05+1.05+1.05+1.05)/4
+
+File: 110_applu.txt
+instructions: 87556995767
+=(21915660332+21852845250+21875520045+21912970140)
+frequencies: 1.498
+=(1.498+1.498+1.498+1.500)/4
+ipcs:0.21
+=1*(0.22+0.21+0.21+0.22)/4
+
+File: 126_gcc.txt
+instructions: 13365820419
+=(3341568879+3343846753+3342152384+3338252403)
+frequencies: 1.475
+=(1.472+1.472+1.479+1.476)/4
+ipcs:0.61
+=1*(0.61+0.61+0.61+0.61)/4
+
+================================================================================
+Finished running benchmarks
+================================================================================

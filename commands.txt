@@ -1,0 +1,59 @@
+docker pull intensivate/riscv-opensource:aarch64_benchmarks_without_mpi
+
+docker run --privileged -dit --name aarch64_benchmarks_without_mpi intensivate/riscv-opensource:aarch64_benchmarks_without_mpi 
+
+
+
+docker exec -it aarch64_benchmarks_without_mpi /root/i-benchmarks/run_all_benchmarks.sh -t 4
+
+
+
+
+docker exec -it aarch64_benchmarks_without_mpi /bin/bash
+
+
+
+
+docker pull intensivate/riscv-opensource:aarch64_benchmarks
+
+docker run --privileged -dit --name all_aarch64_benchmarks intensivate/riscv-opensource:aarch64_benchmarks 
+
+docker exec -it all_aarch64_benchmarks /root/i-benchmarks/run_all_benchmarks.sh
+
+docker exec -it all_aarch64_benchmarks /bin/bash
+
+
+
+
+
+
+sudo mkdir /var/docker
+
+sudo fdisk -l
+sudo mount /dev/mmcblk1 /var/docker
+
+cd /var/docker
+
+ sudo fallocate -l 10G /var/docker/swapfile
+ sudo chmod 600 /var/docker/swapfile
+ sudo mkswap /var/docker/swapfile
+ sudo swapon /var/docker/swapfile
+
+
+docker kill $(docker ps -q)
+
+
+docker images -a
+docker system prune -a
+docker rmi
+
+
+stop all containers:
+docker kill $(docker ps -q)
+
+remove all containers
+docker rm $(docker ps -a -q)
+
+remove all docker images
+docker rmi $(docker images -q)
+
