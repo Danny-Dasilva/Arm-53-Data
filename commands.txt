@@ -16,14 +16,19 @@ docker exec -it aarch64_benchmarks_without_mpi /bin/bash
 
 docker pull intensivate/riscv-opensource:aarch64_benchmarks
 
-docker run --privileged -dit --name all_aarch64_benchmarks intensivate/riscv-opensource:aarch64_benchmarks 
+docker run --privileged -dit \
+--name all_aarch64_benchmarks \
+--mount type=bind, src=${CURRENT_DIR}, dst=/root \
+intensivate/riscv-opensource:aarch64_benchmarks 
 
-docker exec -it all_aarch64_benchmarks /root/i-benchmarks/run_all_benchmarks.sh
+docker exec -it all_aarch64_benchmarks /root/i-benchmarks/run_all_benchmarks.sh -t 4
+
 
 docker exec -it all_aarch64_benchmarks /bin/bash
 
 
 
+sudo ./run_all_benchmarks.sh -t 4 | sudo tee output.txt
 
 
 
@@ -56,4 +61,27 @@ docker rm $(docker ps -a -q)
 
 remove all docker images
 docker rmi $(docker images -q)
+
+
+
+tar zxvf docker-20.10.2.tgz
+
+sudo cp docker/* /usr/bin/
+
+
+mdt wait-for-device && mdt shell
+
+mdt install out/target/product/mt8167s_excelsior/packages/bsp/linux-image-4.19.125-mtk_4-2_arm64.deb
+
+
+
+ ssh -i ~/.config/mdt/keys/mdt.key mendel@192.168.100.2
+
+
+
+ git config --global user.email ""
+
+ git config --global user.name ""
+BigdataBench=$PWD
+/home/mendel/sd_card/i-benchmarks/MPI/bin/mpi/BigDataBench_V4.0_MPI
 
