@@ -16,16 +16,16 @@ docker exec -it aarch64_benchmarks_without_mpi /bin/bash
 
 docker pull intensivate/riscv-opensource:aarch64_benchmarks
 
-docker run --privileged -dit \
---name all_aarch64_benchmarks \
---mount type=bind, src=${CURRENT_DIR}, dst=/root \
-intensivate/riscv-opensource:aarch64_benchmarks 
 
-docker exec -it all_aarch64_benchmarks /root/i-benchmarks/run_all_benchmarks.sh -t 4
+docker run --privileged -dit --name aarch64_benchmarks intensivate/riscv-opensource:aarch64_benchmarks 
 
 
-docker exec -it all_aarch64_benchmarks /bin/bash
+docker exec -it aarch64_benchmarks /root/i-benchmarks/run_all_benchmarks.sh -t 4
 
+
+docker exec -it aarch64_benchmarks /bin/bash
+
+docker exec -it all_aarch64_benchmarks /root/i-benchmarks/run_mcf.sh -t 4
 
 
 sudo ./run_all_benchmarks.sh -t 4 | sudo tee output.txt
@@ -79,9 +79,18 @@ mdt install out/target/product/mt8167s_excelsior/packages/bsp/linux-image-4.19.1
 
 
 
- git config --global user.email ""
+git config --global user.email ""
 
- git config --global user.name ""
+git config --global user.name ""
 BigdataBench=$PWD
 /home/mendel/sd_card/i-benchmarks/MPI/bin/mpi/BigDataBench_V4.0_MPI
 
+
+git filter-branch --env-filter '
+    if [ "$GIT_AUTHOR_EMAIL" = "" ]; then \
+        export GIT_AUTHOR_NAME="" GIT_AUTHOR_EMAIL=""; \
+    fi
+    '
+
+
+perf stat -a -- sleep 10
